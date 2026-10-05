@@ -1,5 +1,7 @@
 # AisleIQ em Snowflake + dbt
 
+[![CI](https://github.com/fred-diaz-analytics/aisleiq_snowflake_dbt/actions/workflows/ci.yml/badge.svg)](https://github.com/fred-diaz-analytics/aisleiq_snowflake_dbt/actions/workflows/ci.yml)
+
 [Read in English](README.md)
 
 Analítica de execução em ponto de venda (trade marketing) sobre dados 100% sintéticos: como os produtos são expostos, precificados e sinalizados nas lojas, e como os promotores cumprem as visitas. Esta é a reconstrução do AisleIQ em Snowflake + dbt, com o mesmo domínio e o mesmo gerador sintético da versão original em Databricks. Sem dados reais nem PII.
@@ -44,7 +46,9 @@ bash scripts/run_all.sh                    # gera, ingere, dbt seed + build (dev
 
 ## Aceitação
 
-A migração é aceita quando o `dbt build` passa em `AISLEIQ_DEV` e os KPIs em `MARTS` recuperam a verdade plantada (`dbt/tests/verdade_plantada.sql`).
+A migração é aceita quando o `dbt build` passa em `AISLEIQ_DEV` e os KPIs em `MARTS` recuperam a verdade plantada (`dbt/tests/verdade_plantada.sql`). O teste fica preso à janela fixa do backfill (até 2026-08-10), em que os efeitos foram calibrados; veja `docs/dbt-conventions.md` para o que acontece nos dias seguintes.
+
+Um agendamento no GitHub Actions (`.github/workflows/daily.yml`) atualiza o `AISLEIQ_PROD` todo dia: gera os novos dias úteis, carrega e roda o `dbt build`.
 
 ## Verificações
 
