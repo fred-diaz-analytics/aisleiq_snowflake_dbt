@@ -4,13 +4,16 @@
 -- planted (poor replenishment chains, a price war chain, an excellence chain, 35 critical
 -- stores, decay by visit cadence)? Ported from validar_verdade_plantada.py of the original.
 -- The answer key is the seed verdade_plantada, one row per store.
+-- The planted effects were calibrated on the fixed backfill (up to 2026-08-10), so the test
+-- looks only at days up to var('verdade_plantada_fim'); the daily job keeps adding days after it.
 -- Returns one row per failed criterion; no rows means every criterion passed.
 
 with params as (
 
     select
         12 * 7 as janela_dias,
-        4 as min_visitas
+        4 as min_visitas,
+        to_date('{{ var("verdade_plantada_fim", "2026-08-10") }}') as dt_fim
 
 ),
 
@@ -24,7 +27,7 @@ dia as (
         avg(s.avg_nota_preco) as nota_preco
     from {{ ref('scores_execucao_pdv') }} as s
     cross join params as p
-    where s.dt_pesquisa > (select dateadd(day, -p.janela_dias, max(dt_pesquisa)) from {{ ref('scores_execucao_pdv') }})
+    where s.dt_pesquisa > dateadd(day, -p.janela_dias, p.dt_fim) and s.dt_pesquisa <= p.dt_fim
     group by s.id_loja, s.dt_pesquisa
 
 ),
@@ -127,7 +130,9 @@ ruptura_loja as (
         avg(r.pct_ruptura) as pct_ruptura
     from {{ ref('fct_ruptura') }} as r
     inner join {{ ref('verdade_plantada') }} as g on r.id_loja = g.id_loja
-    where not (g.critica or g.rede_ruptura or g.rede_guerra_preco or g.rede_excelencia)
+    where
+        not (g.critica or g.rede_ruptura or g.rede_guerra_preco or g.rede_excelencia)
+        and r.dt_pesquisa <= (select dt_fim from params)
     group by g.periodicidade_visita, r.id_loja
 
 ),

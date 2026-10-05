@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Single command that refreshes everything: generate (if needed), load RAW,
+# Single command that refreshes everything: generate (backfill if needed, then
+# catch-up to today), load RAW,
 # then dbt seed + build. Usage:
 #   bash scripts/run_all.sh [--target dev|prod] [--docs] [--regenerate]
 # Connection variables (SNOWFLAKE_*) must already be in the environment, e.g.
@@ -28,10 +29,13 @@ export SNOWFLAKE_DATABASE="AISLEIQ_${target^^}"
 
 section() { printf '\n== %s\n' "$1"; }
 
-if (( regenerate )) || [[ ! -d generator/output ]]; then
-  section "generate synthetic files (deterministic)"
+if (( regenerate )) || [[ ! -f generator/output/estado_execucao.csv ]]; then
+  section "generate the fixed backfill (deterministic)"
   python generator/backfill_2026.py
 fi
+
+section "generate the weekdays missing up to today (catch-up)"
+python generator/job_diario.py
 
 section "ingest into $SNOWFLAKE_DATABASE.RAW"
 python ingestion/ingest.py

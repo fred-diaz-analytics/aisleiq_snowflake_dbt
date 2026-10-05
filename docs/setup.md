@@ -43,7 +43,8 @@ DBT_PROFILES_DIR=. ../.venv/Scripts/dbt.exe debug
 ## 4. Generate and load the daily data
 
 ```bash
-python generator/backfill_2026.py          # deterministic parquets in generator/output (git-ignored)
+python generator/backfill_2026.py          # fixed backfill 2026-01-01 to 2026-08-10 + state files, in generator/output (git-ignored)
+python generator/job_diario.py             # catch-up: every weekday missing up to today
 set -a; source ~/.aisleiq/aisleiq.env; set +a
 python ingestion/ingest.py                 # PUT to @RAW.LANDING, COPY INTO RAW, as AISLEIQ_LOADER
 ```
@@ -56,14 +57,14 @@ python ingestion/ingest.py                 # PUT to @RAW.LANDING, COPY INTO RAW,
 Or run all of it, plus dbt, with `bash scripts/run_all.sh` (see `docs/orchestration.md`). Then `dbt seed && dbt build` (inside `dbt/`), and `dbt source freshness` to check that `RAW` is up to date.
 
 - `source_date` is not filled by `COPY INTO` itself, which only records `source_file` and `ingested_at`. A follow-up `UPDATE` (one statement for all files) fills it from the file name, only for rows still without a date, so a run that died after the load heals on the next one.
-- Freshness thresholds in `dbt/models/staging/_sources.yml` (warn after 2 days, error after 7) are a production-like default, not from the spec. The synthetic data ends on 2026-08-10, so `dbt source freshness` reports an error until `RAW` is reloaded with newer days; that is expected for a static data set, not a pipeline fault.
+- Freshness thresholds in `dbt/models/staging/_sources.yml` (warn after 2 days, error after 7) are a production-like default, not from the spec. The daily job generates weekdays only, so freshness warns on Mondays and after weekends or holidays without a run; it errors only if the schedule stops for a week.
 
 ## Rebuild everything after the trial expires
 
 The repository is the source of truth; nothing lives only in Snowflake.
 
 1. Create a new Snowflake account and repeat step 2 (the wizard is idempotent and generates a new key pair).
-2. `bash scripts/run_all.sh` regenerates the same synthetic data (deterministic), loads `RAW`, and runs `dbt seed` and `dbt build` in dev. Add `--target prod` to build prod.
+2. `bash scripts/run_all.sh` regenerates the synthetic data (the backfill is deterministic; the catch-up continues from it to today), loads `RAW`, and runs `dbt seed` and `dbt build` in dev. Add `--target prod` to build prod.
 3. Update the three GitHub secrets (`SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_PRIVATE_KEY`) so the daily schedule works again (`docs/orchestration.md`).
 
 ## Environment conventions

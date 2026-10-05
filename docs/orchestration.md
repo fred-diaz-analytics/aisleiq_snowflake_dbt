@@ -7,7 +7,9 @@ set -a; source ~/.aisleiq/aisleiq.env; set +a
 bash scripts/run_all.sh [--target dev|prod] [--docs] [--regenerate]
 ```
 
-It runs, in order: the generator (only when `generator/output` is missing, or with `--regenerate`), `ingestion/ingest.py`, `dbt seed`, `dbt build`, and optionally `dbt docs generate`. The load goes to the database of the chosen target (`AISLEIQ_DEV` by default), so ingestion and dbt always agree. Ingestion is idempotent, so a repeated run loads nothing twice.
+It runs, in order: the fixed backfill (only when `generator/output` has no state, or with `--regenerate`), the catch-up `generator/job_diario.py` (every weekday missing up to today), `ingestion/ingest.py`, `dbt seed`, `dbt build`, and optionally `dbt docs generate`. The load goes to the database of the chosen target (`AISLEIQ_DEV` by default), so ingestion and dbt always agree. Ingestion is idempotent, so a repeated run loads nothing twice.
+
+The runner starts empty every day, so the workflow regenerates the backfill and then the catch-up. That is reproducible: the state is chained from the deterministic backfill, and each day is seeded by its date. Only the new weekdays are uploaded and loaded.
 
 ## Daily schedule (GitHub Actions)
 

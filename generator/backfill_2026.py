@@ -1,7 +1,8 @@
 """
 Backfill of the synthetic daily files (2026-01-01 to 2026-08-10, a fixed
-window, not "until today", so the numbers stay reproducible). All generation
-logic lives in lib_geracao.py; this is a thin entrypoint.
+window, not "until today", so the backfill stays reproducible). All generation
+logic lives in lib_geracao.py; this is a thin entrypoint. It also writes
+dclientes.csv and estado_*.csv, the state that job_diario.py continues from.
 
 Generation is deterministic (seeds tied to the date, fixed seed=7 for stores
 and promoters), so running this script on any machine reproduces exactly the
@@ -61,6 +62,7 @@ def backfill_execucao(dim_lojas: pd.DataFrame, out_dir: str) -> None:
             print(f"[execucao]    ({i}/{total_dias}) {d.isoformat()}: no visits", flush=True)
         d += timedelta(days=1)
 
+    estado.to_csv(os.path.join(out_dir, "estado_execucao.csv"), index=False, encoding="utf-8-sig")
     print(f"[execucao]    done: {com_dado} days with data | next free id: {proximo_id} | files in {dias_dir}")
 
 
@@ -84,6 +86,7 @@ def backfill_atendimento(dim_lojas: pd.DataFrame, out_dir: str) -> None:
             print(f"[atendimento] ({i}/{total_dias}) {d.isoformat()}: no visits", flush=True)
         d += timedelta(days=1)
 
+    estado.to_csv(os.path.join(out_dir, "estado_atendimento.csv"), index=False, encoding="utf-8-sig")
     print(f"[atendimento] done: {com_dado} days with data | next free id: {proximo_id} | files in {dias_dir}")
 
 
@@ -98,6 +101,7 @@ if __name__ == "__main__":
 
     print(f"Generating the store dimension ({args.n_lojas} stores)...", flush=True)
     dim_lojas = build_dim_lojas(n_lojas=args.n_lojas, seed=7)  # generated once, serves both domains
+    dim_lojas.to_csv(os.path.join(args.out_dir, "dclientes.csv"), index=False, encoding="utf-8-sig")
 
     if args.dominio in ("execucao", "todos"):
         print(f"=== PDV execution backfill: {DATA_INICIO.isoformat()} to {DATA_FIM.isoformat()} ===", flush=True)
