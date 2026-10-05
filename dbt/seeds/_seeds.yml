@@ -23,3 +23,15 @@ seeds:
     description: Expected weekly turnover and must-have flag per product x store category.
   - name: meta_share
     description: Shelf share goal (%) per brand x store category.
+  - name: verdade_plantada
+    description: >
+      Answer key of the effects the synthetic generator planted, one row per store.
+      Not business data: only the singular test verdade_plantada reads it. Built
+      outside prod only. Regenerate with generator/export_verdade_plantada.py.
+    config:
+      enabled: "{{ target.name != 'prod' }}"
+      column_types:
+        critica: boolean
+        rede_ruptura: boolean
+        rede_guerra_preco: boolean
+        rede_excelencia: boolean

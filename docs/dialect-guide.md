@@ -15,6 +15,12 @@ Differences found while migrating the original AisleIQ SQL. Each row is somethin
 | Median | `PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY x)` in a join of aggregates | `median(x) over (partition by k)` | One window per statistic, no self-join. A median of medians cannot be nested in one window: split it in two CTEs (median, then median of absolute deviations) |
 | Dedupe | Subquery with `ROW_NUMBER()`, then `SELECT * EXCEPT (rn)` | `qualify row_number() over (...) = 1` | No helper column to drop. `EXCEPT` is `EXCLUDE` in Snowflake |
 | Conditional count | `SUM(CASE WHEN b THEN 1 ELSE 0 END)` | `count_if(b)` | Shorter and null-safe |
+| Filtered aggregate | `COUNT(*) FILTER (WHERE b)` | `count_if(b)` | Snowflake has no `FILTER` clause |
+| Date window | `MAX(d) - INTERVAL 84 DAYS` | `dateadd(day, -84, max(d))` | No interval arithmetic on dates |
+| Quantile | `quantile(0.2)` in pandas | `percentile_cont(0.2) within group (order by x)` | Same linear interpolation, so the bottom-quintile cut matches |
+| Rank correlation | `rank().corr(rank())` in pandas | `corr()` over average ranks: `rank() + (count(*) over (partition by x) - 1) / 2.0` | No Spearman function; `rank()` alone gives ties the lowest rank and would shift rho |
+| Permutation test | `numpy` shuffle, 1000 times | `table(generator(rowcount => 1000))` plus `row_number()` over `hash(...)` orders | A deterministic permutation per iteration, run inside the warehouse |
+| `UNION` | `UNION` is distinct | Same, but sqlfluff wants `union distinct` spelled out | Readability only |
 | Null-safe join | Not needed in the original, which dropped null dates by accident in an inner join | `is not distinct from` | Keeps rows without a date (flagged invalid) instead of silently losing them |
 | `EXPECT` constraints | `CONSTRAINT x EXPECT (...)`, optional `ON VIOLATION DROP ROW` | dbt data test; `severity` warn or error | `DROP ROW` becomes an error test so nothing disappears quietly. See `docs/dbt-conventions.md` |
 | Same name for a seed and a model | Not applicable | dbt refuses an ambiguous `ref()` | The target seeds `sku_prioridade` and `meta_share` forced the marts to be `prioridade_sku` and `meta_share_gondola` |

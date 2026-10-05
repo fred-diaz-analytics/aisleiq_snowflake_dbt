@@ -1,0 +1,296 @@
+version: 2
+
+unit_tests:
+  - name: visitas_completas_gate
+    description: >
+      An absent product is complete with presence alone; a present product also needs
+      valid stockout, price and shelf share.
+    model: visitas_completas
+    given:
+      - input: ref('fct_presenca')
+        rows:
+          - {id_loja: 1, id_produto: 10, dt_pesquisa: '2026-01-05', total_presente: 0}
+          - {id_loja: 1, id_produto: 11, dt_pesquisa: '2026-01-05', total_presente: 1}
+          - {id_loja: 1, id_produto: 12, dt_pesquisa: '2026-01-05', total_presente: 1}
+          - {id_loja: 1, id_produto: 13, dt_pesquisa: '2026-01-05', total_presente: 1}
+          - {id_loja: 1, id_produto: 14, dt_pesquisa: '2026-01-05', total_presente: 1}
+      - input: ref('fct_ruptura')
+        rows:
+          - {id_loja: 1, id_produto: 11, dt_pesquisa: '2026-01-05'}
+          - {id_loja: 1, id_produto: 13, dt_pesquisa: '2026-01-05'}
+          - {id_loja: 1, id_produto: 14, dt_pesquisa: '2026-01-05'}
+      - input: ref('fct_preco')
+        rows:
+          - {id_loja: 1, id_produto: 11, dt_pesquisa: '2026-01-05'}
+          - {id_loja: 1, id_produto: 12, dt_pesquisa: '2026-01-05'}
+          - {id_loja: 1, id_produto: 14, dt_pesquisa: '2026-01-05'}
+      - input: ref('fct_share_gondola')
+        rows:
+          - {id_loja: 1, id_produto: 11, dt_pesquisa: '2026-01-05'}
+          - {id_loja: 1, id_produto: 12, dt_pesquisa: '2026-01-05'}
+          - {id_loja: 1, id_produto: 13, dt_pesquisa: '2026-01-05'}
+    expect:
+      rows:
+        # 10 absent: in with presence alone. 11 present with all three answers: in.
+        # 12 misses stockout, 13 misses price, 14 misses share: out.
+        - {id_loja: 1, id_produto: 10, dt_pesquisa: '2026-01-05', presente: false}
+        - {id_loja: 1, id_produto: 11, dt_pesquisa: '2026-01-05', presente: true}
+  - name: kpi_preco_curve
+    description: >
+      Asymmetric price curve against the suggested price (100, band -3% to +5%):
+      100 inside the band, quadratic drop below it down to the floor at -18%, soft drop above it.
+    model: kpi_preco
+    given:
+      - input: ref('fct_preco')
+        rows:
+          - {id_loja: 1, id_produto: 1, dt_pesquisa: '2026-01-05', preco_observado: 100}
+          - {id_loja: 2, id_produto: 1, dt_pesquisa: '2026-01-05', preco_observado: 89.5}
+          - {id_loja: 3, id_produto: 1, dt_pesquisa: '2026-01-05', preco_observado: 80}
+          - {id_loja: 4, id_produto: 1, dt_pesquisa: '2026-01-05', preco_observado: 115}
+      - input: ref('visitas_completas')
+        rows:
+          - {id_loja: 1, id_produto: 1, dt_pesquisa: '2026-01-05'}
+          - {id_loja: 2, id_produto: 1, dt_pesquisa: '2026-01-05'}
+          - {id_loja: 3, id_produto: 1, dt_pesquisa: '2026-01-05'}
+          - {id_loja: 4, id_produto: 1, dt_pesquisa: '2026-01-05'}
+      - input: ref('dim_produto')
+        rows:
+          - {id_produto: 1, categoria_produto: 'A'}
+      - input: ref('dim_loja')
+        rows:
+          - {id_loja: 1, categoria_loja: 'VAREJO'}
+          - {id_loja: 2, categoria_loja: 'VAREJO'}
+          - {id_loja: 3, categoria_loja: 'VAREJO'}
+          - {id_loja: 4, categoria_loja: 'VAREJO'}
+      - input: ref('meta_preco')
+        rows:
+          - {id_produto: 1, categoria_loja: 'VAREJO', preco_sugerido: 100, banda_min_pct: -3, banda_max_pct: 5}
+    expect:
+      rows:
+        # on target: 100
+        - {id_loja: 1, avg_nota_preco: 100}
+        # -10.5%, halfway between the band edge (-3%) and the red line (-18%): 1 - 0.5^2 = 75
+        - {id_loja: 2, avg_nota_preco: 75}
+        # -20%, past the red line: floor of 1
+        - {id_loja: 3, avg_nota_preco: 1}
+        # +15%, 10 points above the band edge: 1 - 10 * 0.1^2 = 90
+        - {id_loja: 4, avg_nota_preco: 90}
+  - name: scores_execucao_pdv_weights_and_reweighting
+    description: >
+      Weights are 55/20/15/5/5. A pillar with no data leaves the denominator and
+      cobertura_pilares_pct reports the weight that was measured.
+    model: scores_execucao_pdv
+    given:
+      - input: ref('kpi_disponibilidade_efetiva')
+        rows:
+          - {id_loja: 1, dt_pesquisa: '2026-01-05', categoria_produto: 'A', disponibilidade_efetiva: 100, osa_must_have: 100}
+          - {id_loja: 2, dt_pesquisa: '2026-01-05', categoria_produto: 'A', disponibilidade_efetiva: 80, osa_must_have: 80}
+          - {id_loja: 3, dt_pesquisa: '2026-01-05', categoria_produto: 'A', disponibilidade_efetiva: 60, osa_must_have: 60}
+          - {id_loja: 4, dt_pesquisa: '2026-01-05', categoria_produto: 'A', disponibilidade_efetiva: 100, osa_must_have: 100}
+      - input: ref('kpi_preco')
+        rows:
+          - {id_loja: 1, dt_pesquisa: '2026-01-05', categoria_produto: 'A', avg_nota_preco: 50}
+          - {id_loja: 4, dt_pesquisa: '2026-01-05', categoria_produto: 'A', avg_nota_preco: 100}
+      - input: ref('kpi_share_gondola')
+        rows:
+          - {id_loja: 1, dt_pesquisa: '2026-01-05', categoria_produto: 'A', avg_nota_share: 0}
+      - input: ref('kpi_ponto_extra')
+        rows:
+          - {id_loja: 1, dt_pesquisa: '2026-01-05', categoria_produto: 'A', avg_nota_ponto_extra: 100}
+          - {id_loja: 2, dt_pesquisa: '2026-01-05', categoria_produto: 'A', avg_nota_ponto_extra: 100}
+          - {id_loja: 4, dt_pesquisa: '2026-01-05', categoria_produto: 'A', avg_nota_ponto_extra: 100}
+      - input: ref('kpi_mpdv')
+        rows:
+          - {id_loja: 1, dt_pesquisa: '2026-01-05', categoria_produto: 'A', avg_nota_mpdv: 0}
+          - {id_loja: 4, dt_pesquisa: '2026-01-05', categoria_produto: 'A', avg_nota_mpdv: 100}
+    expect:
+      rows:
+        # all five pillars: 0.55*100 + 0.20*50 + 0.15*0 + 0.05*100 + 0.05*0 = 70
+        - {id_loja: 1, score_execucao_pdv: 70, cobertura_pilares_pct: 100}
+        # availability + extra display only: (0.55*80 + 0.05*100) / 0.60 = 81.67
+        - {id_loja: 2, score_execucao_pdv: 81.67, cobertura_pilares_pct: 60}
+        # availability only: the score is the availability itself
+        - {id_loja: 3, score_execucao_pdv: 60, cobertura_pilares_pct: 55}
+        # everything but shelf share, all perfect: (0.55 + 0.20 + 0.05 + 0.05) / 0.85 = 100
+        - {id_loja: 4, score_execucao_pdv: 100, cobertura_pilares_pct: 85}
+
+models:
+  - name: visitas_completas
+    description: >
+      Visit completeness gate per store, product and day. An absent product is complete with
+      presence alone; a present one also needs valid stockout, price and shelf share.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, id_produto, dt_pesquisa]
+    columns:
+      - name: id_loja
+        data_tests: [not_null]
+      - name: id_produto
+        data_tests: [not_null]
+      - name: dt_pesquisa
+        data_tests: [not_null]
+  - name: kpi_disponibilidade_efetiva
+    description: Pillar 1 (weight 55%), effective availability (OSA) weighted by weekly SKU value, per store, day and category.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, dt_pesquisa, categoria_produto]
+    columns:
+      - name: id_loja
+        data_tests: [not_null]
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: categoria_produto
+        data_tests: [not_null]
+      - name: disponibilidade_efetiva
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn
+  - name: kpi_preco
+    description: Pillar 2 (weight 20%), price adherence to the suggested price per channel, per store, day and category.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, dt_pesquisa, categoria_produto]
+    columns:
+      - name: id_loja
+        data_tests: [not_null]
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: categoria_produto
+        data_tests: [not_null]
+      - name: avg_nota_preco
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn
+  - name: kpi_share_gondola
+    description: Pillar 3 (weight 15%), shelf share against the brand x channel goal, per store, day and category.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, dt_pesquisa, categoria_produto]
+    columns:
+      - name: id_loja
+        data_tests: [not_null]
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: categoria_produto
+        data_tests: [not_null]
+      - name: avg_nota_share
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn
+  - name: kpi_ponto_extra
+    description: Pillar 4 (weight 5%), extra displays per visit, per store, day and category.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, dt_pesquisa, categoria_produto]
+    columns:
+      - name: id_loja
+        data_tests: [not_null]
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: categoria_produto
+        data_tests: [not_null]
+      - name: avg_nota_ponto_extra
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn
+  - name: kpi_mpdv
+    description: Pillar 5 (weight 5%), MPDV activated, per store, day and category.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, dt_pesquisa, categoria_produto]
+    columns:
+      - name: id_loja
+        data_tests: [not_null]
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: categoria_produto
+        data_tests: [not_null]
+      - name: avg_nota_mpdv
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn
+  - name: scores_execucao_pdv
+    description: Execution score (0-100) per store, day and category, re-weighted over the measured pillars.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, dt_pesquisa, categoria_produto]
+    columns:
+      - name: id_loja
+        data_tests: [not_null]
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: categoria_produto
+        data_tests: [not_null]
+      - name: score_execucao_pdv
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn
+      - name: cobertura_pilares_pct
+        description: Share of the total pillar weight that was measured. Availability alone is 55.
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 55
+                max_value: 100
+              config:
+                severity: warn
+  - name: kpi_valor_em_risco
+    description: Weekly value (R$) of the SKUs that were absent or in stockout, per store, day and category.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, dt_pesquisa, categoria_produto]
+    columns:
+      - name: id_loja
+        data_tests: [not_null]
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: categoria_produto
+        data_tests: [not_null]
+      - name: valor_em_risco_semanal
+        data_tests:
+          - non_negative:
+              config:
+                severity: warn
+  - name: qualidade_completude_visita
+    description: One row. Monitors the completeness gate, so discarded visits do not vanish silently.
+    columns:
+      - name: pct_incompletas
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn

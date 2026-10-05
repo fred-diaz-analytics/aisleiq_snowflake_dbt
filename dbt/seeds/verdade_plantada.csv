@@ -1,0 +1,501 @@
+id_loja,rede,categoria_loja,periodicidade_visita,id_usuario,critica,rede_ruptura,rede_guerra_preco,rede_excelencia,fator_ruptura,fator_presenca,fator_delistar,fator_preco,dias_tipicos_entre_visitas,severidade_esperada
+1,Atacadão Sul,VAREJO,QUINZENAL,8,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+2,Center Compras,VAREJO,SEMANAL,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+3,Rede Popular,VAREJO,SEMANAL,13,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+4,Rede Popular,VAREJO,MENSAL,5,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+5,Mercado Cia,VAREJO,SEMANAL,7,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+6,Super Economia,VAREJO,MENSAL,2,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+7,Rede Confiança,VAREJO,MENSAL,3,False,False,False,True,0.5,1.0,1.0,1.0,28,-0.88
+8,Mercado Vale Verde,ATACADO,ESPORADICA,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+9,Rede Nordeste Mix,ATACAREJO,QUINZENAL,8,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+10,Rede Popular,VAREJO,ESPORADICA,17,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+11,Rede Confiança,VAREJO,QUINZENAL,7,False,False,False,True,0.5,1.0,1.0,1.0,14,-3.45
+12,VarejoMax,ATACADO,ESPORADICA,13,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+13,Super Economia,VAREJO,ESPORADICA,1,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+14,Comper Norte,VAREJO,SEMANAL,15,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+15,Compre Bem Express,VAREJO,MENSAL,16,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+16,Comper Norte,VAREJO,ESPORADICA,15,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+17,Rede Nordeste Mix,VAREJO,QUINZENAL,13,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+18,Rede Nordeste Mix,VAREJO,QUINZENAL,16,True,False,False,False,1.5,0.75,4.0,1.0,14,16.87
+19,Rede Popular,VAREJO,QUINZENAL,19,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+20,Mercado Cia,VAREJO,QUINZENAL,7,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+21,Super Economia,ATACADO,MENSAL,13,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+22,Super Economia,ATACADO,SEMANAL,3,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+23,VarejoMax,VAREJO,QUINZENAL,16,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+24,Rede Bom Preço,VAREJO,SEMANAL,8,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+25,VarejoMax,ATACAREJO,ESPORADICA,1,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+26,Center Compras,VAREJO,ESPORADICA,9,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+27,Mercado Vale Verde,ATACADO,ESPORADICA,17,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+28,Mercadinho Vitória,VAREJO,ESPORADICA,14,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+29,Mercado Cia,VAREJO,SEMANAL,16,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+30,Rede Nordeste Mix,ATACADO,ESPORADICA,13,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+31,Rede Confiança,VAREJO,ESPORADICA,4,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+32,Rede Popular,ATACADO,QUINZENAL,9,True,True,False,False,2.7,0.75,4.0,1.0,14,24.7
+33,Compre Bem Express,VAREJO,SEMANAL,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+34,Rede Bom Preço,VAREJO,MENSAL,3,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+35,Comper Norte,VAREJO,NUCLEO,13,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+36,Rede Bom Preço,ATACAREJO,ESPORADICA,20,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+37,Center Compras,VAREJO,MENSAL,13,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+38,Rede Nordeste Mix,ATACADO,SEMANAL,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+39,Rede Confiança,ATACADO,MENSAL,2,True,False,False,True,0.75,0.75,4.0,1.0,28,11.78
+40,Mercado Cia,VAREJO,NUCLEO,11,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+41,Center Compras,ATACADO,MENSAL,8,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+42,Center Compras,ATACAREJO,ESPORADICA,3,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+43,Rede Popular,VAREJO,QUINZENAL,16,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+44,Rede Confiança,VAREJO,MENSAL,17,False,False,False,True,0.5,1.0,1.0,1.0,28,-0.88
+45,Comper Norte,ATACADO,ESPORADICA,7,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+46,Atacadão Sul,ATACADO,ESPORADICA,19,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+47,Mercado Cia,ATACADO,QUINZENAL,5,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+48,Super Economia,VAREJO,NUCLEO,20,False,True,False,False,1.8,1.0,1.0,1.0,1,5.41
+49,VarejoMax,VAREJO,SEMANAL,3,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+50,VarejoMax,VAREJO,ESPORADICA,18,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+51,Mercado Vale Verde,VAREJO,SEMANAL,2,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+52,Atacado Bom Jesus,VAREJO,SEMANAL,16,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+53,Rede Popular,ATACAREJO,ESPORADICA,7,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+54,Mercado Cia,ATACAREJO,SEMANAL,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+55,Center Compras,ATACADO,MENSAL,19,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+56,VarejoMax,VAREJO,ESPORADICA,15,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+57,Atacado Bom Jesus,ATACADO,SEMANAL,19,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+58,Atacado Bom Jesus,ATACAREJO,QUINZENAL,15,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+59,Bazar Central,ATACADO,NUCLEO,10,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+60,Rede Popular,ATACAREJO,MENSAL,18,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+61,VarejoMax,VAREJO,SEMANAL,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+62,Compre Bem Express,VAREJO,SEMANAL,14,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+63,VarejoMax,VAREJO,SEMANAL,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+64,Atacadão Sul,VAREJO,ESPORADICA,6,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+65,Mercado Cia,VAREJO,MENSAL,20,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+66,Atacadão Sul,VAREJO,ESPORADICA,4,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+67,Mercado Vale Verde,ATACADO,QUINZENAL,18,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+68,Bazar Central,VAREJO,NUCLEO,11,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+69,Bazar Central,VAREJO,MENSAL,12,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+70,Mercado Vale Verde,ATACAREJO,ESPORADICA,16,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+71,Atacado Bom Jesus,VAREJO,ESPORADICA,17,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+72,Compre Bem Express,ATACADO,SEMANAL,20,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+73,Mercado Vale Verde,ATACADO,SEMANAL,7,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+74,Bazar Central,VAREJO,QUINZENAL,10,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+75,Mercadinho Vitória,ATACADO,QUINZENAL,5,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+76,Mercadinho Vitória,VAREJO,NUCLEO,12,False,True,False,False,1.8,1.0,1.0,1.0,1,5.41
+77,Compre Bem Express,VAREJO,ESPORADICA,17,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+78,Atacadão Sul,ATACADO,ESPORADICA,10,True,False,True,False,1.5,0.75,4.0,0.85,7,28.38
+79,Compre Bem Express,VAREJO,QUINZENAL,17,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+80,VarejoMax,ATACADO,QUINZENAL,3,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+81,Rede Bom Preço,VAREJO,ESPORADICA,17,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+82,Mercado Vale Verde,VAREJO,NUCLEO,18,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+83,Compre Bem Express,VAREJO,SEMANAL,8,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+84,VarejoMax,ATACADO,ESPORADICA,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+85,Rede Confiança,VAREJO,QUINZENAL,8,False,False,False,True,0.5,1.0,1.0,1.0,14,-3.45
+86,Mercado Cia,VAREJO,SEMANAL,1,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+87,Compre Bem Express,VAREJO,NUCLEO,10,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+88,Mercado Vale Verde,ATACADO,SEMANAL,11,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+89,Rede Popular,VAREJO,MENSAL,8,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+90,Mercadinho Vitória,ATACAREJO,MENSAL,9,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+91,Atacadão Sul,VAREJO,SEMANAL,2,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+92,Comper Norte,ATACAREJO,ESPORADICA,14,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+93,Super Economia,ATACADO,QUINZENAL,9,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+94,Bazar Central,ATACADO,MENSAL,13,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+95,Mercadinho Vitória,VAREJO,QUINZENAL,10,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+96,Compre Bem Express,ATACADO,ESPORADICA,14,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+97,Compre Bem Express,ATACADO,ESPORADICA,6,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+98,Center Compras,ATACAREJO,SEMANAL,13,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+99,Atacadão Sul,VAREJO,NUCLEO,4,False,False,True,False,1.0,1.0,1.0,0.85,1,12.98
+100,Mercado Vale Verde,ATACADO,MENSAL,6,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+101,VarejoMax,VAREJO,SEMANAL,1,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+102,VarejoMax,ATACAREJO,ESPORADICA,7,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+103,Rede Popular,ATACADO,NUCLEO,6,False,True,False,False,1.8,1.0,1.0,1.0,1,5.41
+104,Bazar Central,VAREJO,ESPORADICA,10,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+105,Mercado Vale Verde,VAREJO,QUINZENAL,4,True,False,False,False,1.5,0.75,4.0,1.0,14,16.87
+106,Mercado Vale Verde,ATACADO,ESPORADICA,1,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+107,Comper Norte,VAREJO,ESPORADICA,13,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+108,Atacadão Sul,ATACAREJO,QUINZENAL,11,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+109,Rede Bom Preço,ATACAREJO,SEMANAL,6,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+110,Compre Bem Express,ATACADO,QUINZENAL,19,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+111,Bazar Central,ATACAREJO,SEMANAL,14,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+112,Mercadinho Vitória,VAREJO,ESPORADICA,8,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+113,Compre Bem Express,VAREJO,QUINZENAL,5,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+114,Mercado Vale Verde,VAREJO,SEMANAL,14,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+115,Mercadinho Vitória,VAREJO,ESPORADICA,19,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+116,Mercado Cia,ATACADO,NUCLEO,15,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+117,VarejoMax,VAREJO,QUINZENAL,14,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+118,Mercado Vale Verde,ATACADO,SEMANAL,14,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+119,Mercadinho Vitória,ATACAREJO,ESPORADICA,3,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+120,Atacadão Sul,VAREJO,ESPORADICA,19,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+121,Rede Confiança,ATACADO,QUINZENAL,3,False,False,False,True,0.5,1.0,1.0,1.0,14,-3.45
+122,Bazar Central,VAREJO,QUINZENAL,10,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+123,VarejoMax,ATACADO,ESPORADICA,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+124,Atacadão Sul,VAREJO,ESPORADICA,2,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+125,Rede Confiança,ATACADO,ESPORADICA,3,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+126,Comper Norte,VAREJO,ESPORADICA,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+127,Rede Nordeste Mix,VAREJO,ESPORADICA,17,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+128,Bazar Central,ATACADO,MENSAL,17,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+129,Comper Norte,ATACADO,ESPORADICA,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+130,Rede Nordeste Mix,ATACAREJO,SEMANAL,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+131,Mercadinho Vitória,ATACADO,ESPORADICA,17,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+132,Atacadão Sul,VAREJO,QUINZENAL,16,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+133,Super Economia,VAREJO,QUINZENAL,5,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+134,Mercado Cia,VAREJO,MENSAL,20,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+135,Rede Popular,ATACAREJO,MENSAL,3,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+136,Super Economia,VAREJO,MENSAL,7,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+137,Rede Bom Preço,VAREJO,QUINZENAL,1,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+138,Super Economia,VAREJO,MENSAL,5,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+139,Rede Confiança,ATACAREJO,SEMANAL,11,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+140,Center Compras,VAREJO,SEMANAL,13,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+141,Atacado Bom Jesus,ATACAREJO,QUINZENAL,19,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+142,Rede Nordeste Mix,ATACADO,ESPORADICA,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+143,Comper Norte,VAREJO,SEMANAL,10,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+144,Mercado Vale Verde,ATACADO,SEMANAL,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+145,Mercadinho Vitória,VAREJO,QUINZENAL,11,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+146,Bazar Central,VAREJO,QUINZENAL,12,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+147,Mercadinho Vitória,VAREJO,MENSAL,1,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+148,Atacadão Sul,VAREJO,SEMANAL,16,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+149,Rede Bom Preço,ATACADO,MENSAL,7,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+150,Bazar Central,ATACAREJO,ESPORADICA,2,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+151,Compre Bem Express,VAREJO,SEMANAL,20,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+152,Atacadão Sul,VAREJO,ESPORADICA,2,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+153,Compre Bem Express,VAREJO,MENSAL,19,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+154,Atacadão Sul,VAREJO,NUCLEO,6,False,False,True,False,1.0,1.0,1.0,0.85,1,12.98
+155,Center Compras,VAREJO,SEMANAL,6,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+156,Rede Popular,ATACADO,MENSAL,11,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+157,Super Economia,ATACADO,SEMANAL,14,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+158,VarejoMax,VAREJO,ESPORADICA,15,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+159,Rede Nordeste Mix,ATACADO,SEMANAL,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+160,Bazar Central,VAREJO,SEMANAL,3,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+161,Center Compras,VAREJO,MENSAL,7,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+162,Mercadinho Vitória,VAREJO,MENSAL,20,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+163,Atacadão Sul,ATACAREJO,SEMANAL,8,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+164,Center Compras,ATACAREJO,MENSAL,16,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+165,Rede Bom Preço,VAREJO,ESPORADICA,16,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+166,Rede Confiança,VAREJO,SEMANAL,5,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+167,Bazar Central,VAREJO,MENSAL,13,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+168,Compre Bem Express,ATACADO,MENSAL,4,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+169,Mercado Cia,ATACADO,ESPORADICA,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+170,Rede Bom Preço,VAREJO,SEMANAL,19,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+171,Rede Confiança,ATACAREJO,QUINZENAL,15,False,False,False,True,0.5,1.0,1.0,1.0,14,-3.45
+172,VarejoMax,ATACAREJO,NUCLEO,5,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+173,Comper Norte,VAREJO,QUINZENAL,15,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+174,Rede Bom Preço,VAREJO,NUCLEO,17,True,False,False,False,1.5,0.75,4.0,1.0,1,14.48
+175,Rede Nordeste Mix,ATACAREJO,MENSAL,3,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+176,Atacadão Sul,VAREJO,MENSAL,16,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+177,Bazar Central,VAREJO,MENSAL,19,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+178,Atacado Bom Jesus,VAREJO,ESPORADICA,13,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+179,Rede Bom Preço,VAREJO,SEMANAL,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+180,Rede Confiança,ATACADO,SEMANAL,15,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+181,VarejoMax,ATACAREJO,NUCLEO,8,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+182,Rede Nordeste Mix,ATACADO,ESPORADICA,2,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+183,Mercado Vale Verde,VAREJO,QUINZENAL,7,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+184,Rede Bom Preço,VAREJO,SEMANAL,2,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+185,Mercado Vale Verde,ATACADO,SEMANAL,15,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+186,Atacadão Sul,VAREJO,MENSAL,4,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+187,Rede Confiança,VAREJO,ESPORADICA,4,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+188,Rede Popular,ATACAREJO,QUINZENAL,7,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+189,Rede Popular,ATACAREJO,QUINZENAL,1,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+190,Rede Nordeste Mix,ATACADO,SEMANAL,20,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+191,Atacado Bom Jesus,ATACADO,MENSAL,20,True,False,True,False,1.5,0.75,4.0,0.85,28,32.23
+192,VarejoMax,VAREJO,MENSAL,1,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+193,VarejoMax,ATACADO,SEMANAL,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+194,Center Compras,VAREJO,QUINZENAL,14,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+195,Atacadão Sul,ATACAREJO,ESPORADICA,17,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+196,Mercado Vale Verde,VAREJO,ESPORADICA,3,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+197,Rede Popular,VAREJO,SEMANAL,20,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+198,VarejoMax,VAREJO,ESPORADICA,17,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+199,Atacado Bom Jesus,VAREJO,SEMANAL,19,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+200,Bazar Central,VAREJO,MENSAL,7,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+201,Rede Popular,ATACADO,SEMANAL,17,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+202,Atacado Bom Jesus,VAREJO,NUCLEO,8,False,False,True,False,1.0,1.0,1.0,0.85,1,12.98
+203,Mercado Cia,VAREJO,ESPORADICA,11,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+204,Atacado Bom Jesus,VAREJO,QUINZENAL,17,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+205,Atacado Bom Jesus,VAREJO,MENSAL,13,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+206,Center Compras,ATACADO,SEMANAL,17,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+207,Rede Bom Preço,VAREJO,QUINZENAL,7,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+208,VarejoMax,ATACADO,SEMANAL,1,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+209,Compre Bem Express,ATACADO,SEMANAL,10,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+210,Atacado Bom Jesus,ATACADO,MENSAL,20,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+211,Atacado Bom Jesus,VAREJO,SEMANAL,10,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+212,Mercadinho Vitória,VAREJO,MENSAL,3,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+213,Rede Popular,ATACADO,QUINZENAL,11,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+214,Atacado Bom Jesus,VAREJO,SEMANAL,13,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+215,Comper Norte,ATACAREJO,MENSAL,8,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+216,Atacadão Sul,ATACADO,ESPORADICA,10,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+217,Compre Bem Express,ATACADO,SEMANAL,3,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+218,Mercado Cia,ATACADO,SEMANAL,18,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+219,Atacadão Sul,VAREJO,SEMANAL,14,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+220,Comper Norte,VAREJO,ESPORADICA,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+221,Mercadinho Vitória,ATACADO,MENSAL,11,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+222,Bazar Central,VAREJO,SEMANAL,17,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+223,Mercadinho Vitória,ATACADO,MENSAL,10,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+224,Mercado Cia,ATACAREJO,SEMANAL,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+225,Comper Norte,VAREJO,ESPORADICA,10,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+226,VarejoMax,VAREJO,ESPORADICA,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+227,Super Economia,ATACAREJO,ESPORADICA,7,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+228,Atacadão Sul,VAREJO,ESPORADICA,16,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+229,Rede Bom Preço,VAREJO,MENSAL,12,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+230,Bazar Central,VAREJO,MENSAL,13,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+231,Bazar Central,VAREJO,NUCLEO,19,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+232,Compre Bem Express,ATACAREJO,ESPORADICA,10,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+233,Atacado Bom Jesus,VAREJO,ESPORADICA,7,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+234,Rede Nordeste Mix,ATACAREJO,MENSAL,10,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+235,Compre Bem Express,VAREJO,MENSAL,13,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+236,Center Compras,VAREJO,ESPORADICA,20,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+237,Bazar Central,ATACADO,NUCLEO,13,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+238,Mercado Vale Verde,VAREJO,NUCLEO,17,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+239,Atacado Bom Jesus,VAREJO,ESPORADICA,12,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+240,VarejoMax,ATACAREJO,ESPORADICA,20,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+241,Bazar Central,ATACADO,ESPORADICA,19,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+242,Atacado Bom Jesus,ATACADO,MENSAL,12,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+243,Mercadinho Vitória,ATACADO,ESPORADICA,14,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+244,Mercadinho Vitória,VAREJO,ESPORADICA,7,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+245,Bazar Central,ATACADO,SEMANAL,16,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+246,Rede Nordeste Mix,VAREJO,ESPORADICA,17,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+247,Comper Norte,ATACADO,ESPORADICA,17,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+248,Rede Nordeste Mix,ATACAREJO,QUINZENAL,3,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+249,Atacado Bom Jesus,ATACADO,SEMANAL,9,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+250,Mercadinho Vitória,ATACADO,MENSAL,6,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+251,Mercado Vale Verde,VAREJO,QUINZENAL,3,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+252,Rede Confiança,VAREJO,SEMANAL,16,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+253,Compre Bem Express,ATACADO,ESPORADICA,9,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+254,Atacadão Sul,ATACADO,SEMANAL,14,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+255,Comper Norte,VAREJO,ESPORADICA,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+256,Mercado Cia,VAREJO,QUINZENAL,20,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+257,Mercado Cia,VAREJO,MENSAL,9,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+258,Mercadinho Vitória,ATACADO,QUINZENAL,10,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+259,Atacadão Sul,VAREJO,SEMANAL,9,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+260,Mercadinho Vitória,VAREJO,ESPORADICA,17,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+261,Comper Norte,ATACADO,QUINZENAL,9,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+262,Comper Norte,ATACAREJO,QUINZENAL,9,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+263,Center Compras,ATACAREJO,SEMANAL,14,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+264,Rede Confiança,VAREJO,SEMANAL,8,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+265,VarejoMax,VAREJO,QUINZENAL,12,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+266,Atacadão Sul,ATACAREJO,SEMANAL,8,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+267,Comper Norte,VAREJO,ESPORADICA,8,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+268,Rede Popular,ATACADO,ESPORADICA,17,True,True,False,False,2.7,0.75,4.0,1.0,7,23.42
+269,Bazar Central,VAREJO,QUINZENAL,15,True,False,False,False,1.5,0.75,4.0,1.0,14,16.87
+270,Compre Bem Express,VAREJO,QUINZENAL,8,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+271,VarejoMax,VAREJO,SEMANAL,8,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+272,Mercadinho Vitória,ATACAREJO,SEMANAL,20,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+273,VarejoMax,VAREJO,QUINZENAL,17,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+274,Mercado Cia,VAREJO,ESPORADICA,7,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+275,Rede Bom Preço,VAREJO,ESPORADICA,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+276,Center Compras,VAREJO,ESPORADICA,16,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+277,Atacadão Sul,VAREJO,SEMANAL,4,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+278,Mercado Cia,ATACAREJO,SEMANAL,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+279,Mercado Vale Verde,ATACADO,MENSAL,13,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+280,Center Compras,VAREJO,MENSAL,3,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+281,Mercadinho Vitória,VAREJO,ESPORADICA,6,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+282,Atacado Bom Jesus,ATACAREJO,SEMANAL,19,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+283,Super Economia,VAREJO,ESPORADICA,14,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+284,Atacado Bom Jesus,ATACAREJO,SEMANAL,2,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+285,Mercadinho Vitória,VAREJO,ESPORADICA,5,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+286,Atacadão Sul,VAREJO,SEMANAL,1,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+287,Mercado Vale Verde,VAREJO,ESPORADICA,20,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+288,Mercado Cia,ATACADO,QUINZENAL,7,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+289,Rede Confiança,VAREJO,MENSAL,9,False,False,False,True,0.5,1.0,1.0,1.0,28,-0.88
+290,Atacado Bom Jesus,VAREJO,MENSAL,3,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+291,Rede Popular,ATACADO,ESPORADICA,4,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+292,Comper Norte,ATACADO,QUINZENAL,15,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+293,Atacadão Sul,ATACAREJO,QUINZENAL,15,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+294,Atacadão Sul,VAREJO,SEMANAL,10,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+295,Rede Popular,ATACADO,QUINZENAL,19,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+296,Compre Bem Express,ATACADO,MENSAL,3,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+297,Rede Popular,VAREJO,MENSAL,5,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+298,Mercado Cia,VAREJO,MENSAL,20,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+299,Atacadão Sul,VAREJO,MENSAL,12,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+300,Comper Norte,ATACADO,SEMANAL,3,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+301,Comper Norte,VAREJO,MENSAL,11,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+302,Rede Bom Preço,VAREJO,ESPORADICA,2,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+303,Super Economia,VAREJO,NUCLEO,3,False,True,False,False,1.8,1.0,1.0,1.0,1,5.41
+304,Comper Norte,VAREJO,SEMANAL,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+305,Center Compras,VAREJO,MENSAL,12,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+306,Bazar Central,ATACADO,ESPORADICA,3,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+307,Rede Nordeste Mix,ATACADO,MENSAL,8,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+308,Compre Bem Express,ATACADO,ESPORADICA,2,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+309,Mercadinho Vitória,VAREJO,MENSAL,20,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+310,Rede Popular,ATACAREJO,MENSAL,11,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+311,Center Compras,VAREJO,QUINZENAL,8,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+312,Center Compras,VAREJO,QUINZENAL,10,True,False,False,False,1.5,0.75,4.0,1.0,14,16.87
+313,Compre Bem Express,VAREJO,SEMANAL,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+314,Rede Bom Preço,VAREJO,ESPORADICA,11,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+315,Rede Popular,VAREJO,MENSAL,3,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+316,Bazar Central,VAREJO,NUCLEO,17,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+317,Rede Popular,ATACADO,QUINZENAL,4,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+318,Rede Confiança,ATACADO,QUINZENAL,20,False,False,False,True,0.5,1.0,1.0,1.0,14,-3.45
+319,Mercado Cia,ATACADO,QUINZENAL,12,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+320,Compre Bem Express,ATACAREJO,QUINZENAL,14,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+321,Comper Norte,VAREJO,MENSAL,6,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+322,Rede Bom Preço,ATACADO,MENSAL,6,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+323,Rede Popular,ATACADO,ESPORADICA,9,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+324,Center Compras,VAREJO,QUINZENAL,13,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+325,Atacadão Sul,VAREJO,SEMANAL,5,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+326,Center Compras,VAREJO,SEMANAL,14,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+327,Super Economia,VAREJO,ESPORADICA,3,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+328,Mercado Cia,ATACAREJO,SEMANAL,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+329,Rede Bom Preço,VAREJO,MENSAL,18,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+330,Comper Norte,VAREJO,SEMANAL,8,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+331,Rede Nordeste Mix,VAREJO,QUINZENAL,3,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+332,Comper Norte,VAREJO,ESPORADICA,10,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+333,Super Economia,VAREJO,SEMANAL,6,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+334,Center Compras,ATACAREJO,SEMANAL,11,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+335,Super Economia,VAREJO,ESPORADICA,7,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+336,Rede Bom Preço,VAREJO,SEMANAL,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+337,Comper Norte,VAREJO,SEMANAL,2,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+338,Comper Norte,ATACADO,QUINZENAL,2,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+339,Atacado Bom Jesus,VAREJO,SEMANAL,18,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+340,Rede Popular,ATACADO,MENSAL,6,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+341,VarejoMax,ATACADO,MENSAL,6,True,False,False,False,1.5,0.75,4.0,1.0,28,19.43
+342,Mercado Cia,ATACADO,QUINZENAL,18,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+343,Super Economia,ATACADO,MENSAL,11,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+344,Atacadão Sul,ATACADO,SEMANAL,10,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+345,Compre Bem Express,ATACADO,ESPORADICA,8,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+346,Bazar Central,ATACADO,MENSAL,17,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+347,Bazar Central,VAREJO,QUINZENAL,16,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+348,Rede Popular,VAREJO,MENSAL,4,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+349,Rede Bom Preço,VAREJO,QUINZENAL,19,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+350,Bazar Central,ATACADO,ESPORADICA,3,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+351,Rede Nordeste Mix,ATACADO,ESPORADICA,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+352,Compre Bem Express,VAREJO,SEMANAL,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+353,Super Economia,ATACAREJO,MENSAL,8,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+354,Atacado Bom Jesus,ATACADO,MENSAL,11,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+355,Compre Bem Express,ATACADO,MENSAL,7,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+356,Atacadão Sul,ATACAREJO,SEMANAL,14,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+357,Rede Popular,VAREJO,QUINZENAL,6,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+358,Mercado Vale Verde,VAREJO,QUINZENAL,6,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+359,Compre Bem Express,ATACADO,SEMANAL,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+360,Atacadão Sul,ATACADO,QUINZENAL,15,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+361,Rede Bom Preço,VAREJO,MENSAL,2,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+362,Mercado Vale Verde,VAREJO,SEMANAL,15,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+363,VarejoMax,VAREJO,MENSAL,19,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+364,Mercado Vale Verde,VAREJO,SEMANAL,20,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+365,Rede Confiança,VAREJO,QUINZENAL,10,False,False,False,True,0.5,1.0,1.0,1.0,14,-3.45
+366,Mercado Vale Verde,ATACADO,MENSAL,14,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+367,Rede Confiança,VAREJO,NUCLEO,14,False,False,False,True,0.5,1.0,1.0,1.0,1,-5.83
+368,Compre Bem Express,ATACAREJO,MENSAL,19,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+369,Atacado Bom Jesus,VAREJO,SEMANAL,12,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+370,VarejoMax,VAREJO,ESPORADICA,19,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+371,Mercadinho Vitória,ATACADO,QUINZENAL,16,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+372,Bazar Central,ATACAREJO,SEMANAL,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+373,Super Economia,VAREJO,SEMANAL,17,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+374,Center Compras,ATACADO,MENSAL,6,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+375,Atacadão Sul,ATACAREJO,ESPORADICA,10,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+376,Bazar Central,VAREJO,ESPORADICA,9,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+377,Rede Popular,ATACAREJO,MENSAL,16,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+378,Rede Nordeste Mix,ATACADO,MENSAL,5,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+379,VarejoMax,ATACAREJO,MENSAL,9,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+380,Mercado Vale Verde,VAREJO,ESPORADICA,16,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+381,Mercadinho Vitória,VAREJO,SEMANAL,17,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+382,Comper Norte,ATACAREJO,ESPORADICA,18,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+383,Mercadinho Vitória,VAREJO,SEMANAL,17,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+384,Atacado Bom Jesus,VAREJO,MENSAL,10,True,False,True,False,1.5,0.75,4.0,0.85,28,32.23
+385,Atacado Bom Jesus,ATACADO,MENSAL,7,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+386,Comper Norte,VAREJO,SEMANAL,19,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+387,Super Economia,VAREJO,SEMANAL,17,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+388,Rede Popular,ATACAREJO,ESPORADICA,13,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+389,Atacado Bom Jesus,VAREJO,QUINZENAL,5,True,False,True,False,1.5,0.75,4.0,0.85,14,29.67
+390,Center Compras,ATACAREJO,MENSAL,16,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+391,Rede Confiança,ATACADO,MENSAL,16,False,False,False,True,0.5,1.0,1.0,1.0,28,-0.88
+392,Rede Bom Preço,ATACADO,MENSAL,4,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+393,Rede Confiança,VAREJO,SEMANAL,10,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+394,Center Compras,ATACAREJO,ESPORADICA,13,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+395,Mercadinho Vitória,VAREJO,ESPORADICA,2,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+396,Bazar Central,VAREJO,ESPORADICA,2,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+397,Rede Nordeste Mix,VAREJO,ESPORADICA,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+398,Rede Bom Preço,VAREJO,MENSAL,17,True,False,False,False,1.5,0.75,4.0,1.0,28,19.43
+399,Super Economia,VAREJO,QUINZENAL,10,True,True,False,False,2.7,0.75,4.0,1.0,14,24.7
+400,Compre Bem Express,ATACAREJO,SEMANAL,12,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+401,Center Compras,ATACAREJO,SEMANAL,13,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+402,Rede Confiança,VAREJO,ESPORADICA,1,True,False,False,True,0.75,0.75,4.0,1.0,7,7.93
+403,Atacadão Sul,ATACADO,ESPORADICA,20,True,False,True,False,1.5,0.75,4.0,0.85,7,28.38
+404,Atacado Bom Jesus,VAREJO,SEMANAL,5,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+405,Rede Confiança,VAREJO,QUINZENAL,1,False,False,False,True,0.5,1.0,1.0,1.0,14,-3.45
+406,Rede Bom Preço,ATACAREJO,SEMANAL,3,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+407,Compre Bem Express,VAREJO,ESPORADICA,6,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+408,Center Compras,ATACADO,ESPORADICA,15,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+409,VarejoMax,VAREJO,MENSAL,19,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+410,Atacadão Sul,VAREJO,QUINZENAL,5,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+411,Comper Norte,VAREJO,ESPORADICA,14,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+412,Comper Norte,ATACADO,SEMANAL,19,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+413,Atacadão Sul,VAREJO,QUINZENAL,19,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+414,Atacado Bom Jesus,ATACADO,QUINZENAL,4,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+415,Rede Confiança,VAREJO,ESPORADICA,12,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+416,Atacado Bom Jesus,VAREJO,ESPORADICA,17,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+417,Atacado Bom Jesus,VAREJO,ESPORADICA,2,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+418,Atacado Bom Jesus,VAREJO,MENSAL,20,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+419,Center Compras,VAREJO,MENSAL,12,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+420,Rede Bom Preço,ATACADO,QUINZENAL,12,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+421,VarejoMax,VAREJO,MENSAL,4,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+422,Comper Norte,VAREJO,ESPORADICA,11,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+423,Comper Norte,VAREJO,MENSAL,4,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+424,Atacado Bom Jesus,ATACAREJO,ESPORADICA,16,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+425,Mercadinho Vitória,VAREJO,ESPORADICA,6,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+426,Rede Bom Preço,VAREJO,ESPORADICA,8,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+427,Rede Popular,VAREJO,SEMANAL,16,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+428,Rede Popular,VAREJO,SEMANAL,12,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+429,Compre Bem Express,ATACAREJO,SEMANAL,19,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+430,VarejoMax,VAREJO,ESPORADICA,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+431,Rede Nordeste Mix,ATACAREJO,MENSAL,12,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+432,Atacado Bom Jesus,VAREJO,ESPORADICA,14,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+433,Compre Bem Express,VAREJO,SEMANAL,12,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+434,Rede Popular,VAREJO,QUINZENAL,2,False,True,False,False,1.8,1.0,1.0,1.0,14,7.79
+435,Rede Confiança,ATACADO,SEMANAL,5,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+436,Rede Popular,ATACADO,SEMANAL,11,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+437,Mercadinho Vitória,ATACAREJO,SEMANAL,2,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+438,Atacadão Sul,ATACADO,MENSAL,2,False,False,True,False,1.0,1.0,1.0,0.85,28,17.93
+439,Comper Norte,ATACAREJO,QUINZENAL,8,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+440,Mercado Cia,ATACAREJO,SEMANAL,17,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+441,Super Economia,ATACADO,SEMANAL,12,True,True,False,False,2.7,0.75,4.0,1.0,7,23.42
+442,Rede Popular,VAREJO,ESPORADICA,16,True,True,False,False,2.7,0.75,4.0,1.0,7,23.42
+443,Compre Bem Express,VAREJO,ESPORADICA,12,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+444,Mercado Vale Verde,VAREJO,MENSAL,16,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+445,Compre Bem Express,ATACADO,ESPORADICA,18,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+446,Rede Nordeste Mix,VAREJO,QUINZENAL,6,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+447,Atacado Bom Jesus,VAREJO,ESPORADICA,10,True,False,True,False,1.5,0.75,4.0,0.85,7,28.38
+448,Center Compras,ATACADO,MENSAL,5,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+449,Rede Nordeste Mix,VAREJO,QUINZENAL,9,True,False,False,False,1.5,0.75,4.0,1.0,14,16.87
+450,Center Compras,VAREJO,MENSAL,1,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+451,Bazar Central,ATACAREJO,QUINZENAL,15,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+452,Atacadão Sul,ATACADO,SEMANAL,10,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+453,Center Compras,VAREJO,ESPORADICA,19,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+454,Mercadinho Vitória,ATACADO,MENSAL,9,False,True,False,False,1.8,1.0,1.0,1.0,28,10.36
+455,Bazar Central,VAREJO,QUINZENAL,15,True,False,False,False,1.5,0.75,4.0,1.0,14,16.87
+456,Rede Bom Preço,VAREJO,MENSAL,10,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+457,VarejoMax,VAREJO,ESPORADICA,10,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+458,Rede Confiança,VAREJO,SEMANAL,13,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+459,Rede Confiança,VAREJO,NUCLEO,16,False,False,False,True,0.5,1.0,1.0,1.0,1,-5.83
+460,Rede Nordeste Mix,VAREJO,QUINZENAL,15,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+461,Atacado Bom Jesus,VAREJO,SEMANAL,3,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+462,Compre Bem Express,ATACADO,QUINZENAL,16,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+463,Rede Popular,ATACAREJO,ESPORADICA,15,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+464,Rede Confiança,ATACADO,SEMANAL,11,False,False,False,True,0.5,1.0,1.0,1.0,7,-4.73
+465,VarejoMax,VAREJO,ESPORADICA,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+466,Rede Nordeste Mix,ATACADO,ESPORADICA,19,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+467,Atacado Bom Jesus,ATACADO,QUINZENAL,4,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+468,Atacado Bom Jesus,VAREJO,ESPORADICA,12,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+469,Rede Bom Preço,VAREJO,SEMANAL,20,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+470,Bazar Central,ATACAREJO,QUINZENAL,15,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+471,Atacado Bom Jesus,VAREJO,QUINZENAL,12,True,False,True,False,1.5,0.75,4.0,0.85,14,29.67
+472,Center Compras,ATACADO,SEMANAL,16,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+473,Compre Bem Express,ATACADO,SEMANAL,19,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+474,Rede Nordeste Mix,ATACADO,QUINZENAL,13,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+475,Comper Norte,ATACADO,SEMANAL,7,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+476,Rede Bom Preço,VAREJO,ESPORADICA,18,True,False,False,False,1.5,0.75,4.0,1.0,7,15.58
+477,Rede Bom Preço,ATACAREJO,QUINZENAL,17,False,False,False,False,1.0,1.0,1.0,1.0,14,2.57
+478,Mercado Vale Verde,VAREJO,ESPORADICA,19,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+479,Mercado Cia,VAREJO,SEMANAL,6,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+480,Mercado Vale Verde,ATACAREJO,ESPORADICA,5,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+481,Mercadinho Vitória,VAREJO,SEMANAL,17,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+482,Atacado Bom Jesus,VAREJO,QUINZENAL,2,False,False,True,False,1.0,1.0,1.0,0.85,14,15.37
+483,VarejoMax,VAREJO,SEMANAL,3,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+484,Rede Popular,VAREJO,ESPORADICA,18,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+485,Comper Norte,ATACAREJO,MENSAL,10,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+486,Rede Confiança,VAREJO,NUCLEO,7,False,False,False,True,0.5,1.0,1.0,1.0,1,-5.83
+487,Center Compras,ATACADO,MENSAL,5,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+488,VarejoMax,VAREJO,MENSAL,13,False,False,False,False,1.0,1.0,1.0,1.0,28,5.13
+489,Bazar Central,VAREJO,ESPORADICA,9,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+490,Mercado Vale Verde,VAREJO,SEMANAL,7,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+491,Center Compras,VAREJO,SEMANAL,4,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+492,Rede Nordeste Mix,VAREJO,NUCLEO,1,False,False,False,False,1.0,1.0,1.0,1.0,1,0.18
+493,Mercado Vale Verde,VAREJO,ESPORADICA,2,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+494,Mercadinho Vitória,VAREJO,ESPORADICA,15,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+495,VarejoMax,VAREJO,SEMANAL,7,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+496,Rede Bom Preço,VAREJO,MENSAL,11,True,False,False,False,1.5,0.75,4.0,1.0,28,19.43
+497,Atacadão Sul,ATACAREJO,SEMANAL,11,False,False,True,False,1.0,1.0,1.0,0.85,7,14.08
+498,Mercadinho Vitória,ATACADO,ESPORADICA,1,False,True,False,False,1.8,1.0,1.0,1.0,7,6.51
+499,VarejoMax,ATACAREJO,SEMANAL,1,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
+500,Mercado Cia,ATACADO,ESPORADICA,1,False,False,False,False,1.0,1.0,1.0,1.0,7,1.28
