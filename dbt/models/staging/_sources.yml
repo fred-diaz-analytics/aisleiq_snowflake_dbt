@@ -16,3 +16,5 @@ sources:
         description: One row per visit attempt (atendimento), as loaded from the daily files.
       - name: execucao_pdv
         description: One row per survey answer (store x product x question), as loaded from the daily files.
+        config:
+          event_time: source_date

@@ -212,6 +212,27 @@ models:
               arguments:
                 min_value: 0.01
                 max_value: 100
+  - name: stg_execucao_pdv_dedup
+    description: >
+      Incremental half of stg_execucao_pdv: typed, structurally flagged and deduplicated
+      answers, built by daily microbatches over source_date. stg_execucao_pdv adds the
+      price outlier flag, which needs all days at once. Not for use by the marts.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, id_produto, indicador, id_usuario, dt_pesquisa]
+    columns:
+      - name: id_pesquisa_resposta
+        data_tests: [unique, not_null]
+      - name: source_date
+        description: File date, the event time of the microbatch. Always filled.
+        data_tests: [not_null]
+      - name: dt_pesquisa
+        description: >
+          Survey date. Equal to source_date in the files (the singular test
+          execucao_pdv_data_igual_ao_arquivo guards it), which is what lets a
+          one-day batch run the per-day dedupe.
+        data_tests: [not_null]
   - name: stg_execucao_pdv
     description: >
       One row per survey answer, typed per indicator, flagged with resposta_valida and

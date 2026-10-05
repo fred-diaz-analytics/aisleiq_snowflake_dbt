@@ -21,6 +21,12 @@ models:
       +materialized: view
       stg_execucao_pdv:
         +materialized: table
+      stg_execucao_pdv_dedup:
+        +materialized: incremental
+        +incremental_strategy: microbatch
+        +event_time: source_date
+        +begin: "2026-01-01"
+        +batch_size: day
     marts:
       +schema: marts
       +materialized: table

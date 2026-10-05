@@ -7,7 +7,7 @@ Short guide for every model added to the project. Business names stay in Portugu
 | Layer | Schema | Folder | Materialization | Content |
 |---|---|---|---|---|
 | Seeds | `SEEDS` | `dbt/seeds/` | table (seed) | Master data CSVs, copied unchanged from the original project |
-| Staging | `STAGING` | `dbt/models/staging/` | view (`table` for `stg_execucao_pdv`, see below) | One model per source entity: column selection, plus typing, dedupe and quality flags when the source needs them. No joins, except the self-join that picks the winning promoter in the survey dedupe. Seed-backed entities need none of these, because seeds are typed on load and keyed uniquely (the tests guard that) |
+| Staging | `STAGING` | `dbt/models/staging/` | view (`table` for `stg_execucao_pdv`, `incremental` for `stg_execucao_pdv_dedup`, see below) | One model per source entity: column selection, plus typing, dedupe and quality flags when the source needs them. No joins, except the self-join that picks the winning promoter in the survey dedupe. Seed-backed entities need none of these, because seeds are typed on load and keyed uniquely (the tests guard that) |
 | Marts | `MARTS` | `dbt/models/marts/` | table | Dimensions, indicators, scores. Joins and business rules live here |
 
 Schema names are clean (no `<target>_` prefix) in both databases; see `dbt/macros/generate_schema_name.sql`.
@@ -43,9 +43,32 @@ Schema names are clean (no `<target>_` prefix) in both databases; see `dbt/macro
 
 CSVs in `dbt/seeds/` are copied from the original project without editing, including accents. `dbt seed` reloads them; they are the only files exempt from the English-only text check.
 
-## Materialization exception
+## Materialization exception: incremental survey answers
 
-`stg_execucao_pdv` is a `table`, not a view: it holds two dedupe steps and a per-SKU median over 1.3M rows, and the six indicator marts would each recompute that on every build. Ticket 06 turns it into an incremental model.
+The survey answers are split in two models:
+
+- `stg_execucao_pdv_dedup` is `incremental` with the `microbatch` strategy: daily batches, event time `source_date` (the file date, never null), start date 2026-01-01. Both dedupe steps partition by day, so one batch holds everything they need. `dt_pesquisa` equals `source_date` in every file, and the singular test `execucao_pdv_data_igual_ao_arquivo` fails if that stops being true, because the batch would then cut a day in two. A late file for an old day is picked up by rerunning that day's batch.
+- `stg_execucao_pdv` is a `table` on top of it: the per-SKU price median and MAD span all days, so a new day can flip the outlier flag of an old row, which a one-day batch cannot do. Its median and MAD scan only the PRICE rows (about a sixth of the data); the rest passes through.
+
+The marts keep reading `stg_execucao_pdv`; nothing else changed.
+
+### When incremental pays off here
+
+It does not, at this volume. Measured on the X-Small warehouse with 1.27M rows: the old single `table` built in about 6 s; the default incremental run (the last two days) takes about 19 s, plus about 4 s for the outlier table. A batch costs a fixed 4 to 6 s of scheduling and a delete+insert, which is more than rebuilding the whole table. A full refresh is slower again: 278 daily batches took about 340 s. It starts to pay off when a full rebuild takes minutes (tens of millions of rows) or costs real credits; until then it is kept as the pattern for the larger volume.
+
+### Running it
+
+Always run the two models together (or `-s stg_execucao_pdv_dedup+`): `stg_execucao_pdv` is a table, so running only the incremental model leaves its outlier flag, and the marts, stale. Keys and relationships are tested once, on `stg_execucao_pdv`, which is what the marts read; the incremental model only guards its own grain and dates. `begin` is 2026-01-01: a file with an earlier `source_date` is never loaded by a full refresh, so move `begin` back if older days ever arrive.
+
+```bash
+dbt run -s stg_execucao_pdv_dedup stg_execucao_pdv                      # daily: the last two days
+dbt run -s stg_execucao_pdv_dedup stg_execucao_pdv --full-refresh       # rebuild everything (about 6 min)
+dbt run -s stg_execucao_pdv_dedup stg_execucao_pdv   --event-time-start 2026-03-10 --event-time-end 2026-03-13             # reprocess a window
+```
+
+### Equivalence with the table version
+
+Compared on the same data, row by row (`minus` in both directions): `stg_execucao_pdv` and 21 of the 23 `MARTS` tables are identical. `kpi_preco` and `scores_execucao_pdv` differ by at most 0.01 in `avg_nota_preco` (and the score derived from it) on 105 rows, with the staging table identical. Cause: `avg_nota_preco` is a `FLOAT` average, whose result depends on summation order, and a value sitting on a rounding tie flips. Rebuilding `kpi_preco` twice from the same input shows the same effect (91 rows differ between the two builds), so it is not caused by the incremental model. Reprocessing a window of past days gave back an identical `stg_execucao_pdv`.
 
 ## Typed text dates
 
