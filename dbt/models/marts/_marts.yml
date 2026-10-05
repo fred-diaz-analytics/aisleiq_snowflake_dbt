@@ -78,3 +78,154 @@ models:
           - non_negative:
               config:
                 severity: warn
+  - name: fct_presenca
+    description: Share of valid answers in which the product was present, per store, product and day.
+    data_tests: &grain_loja_produto_dia
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, id_produto, dt_pesquisa]
+    columns:
+      - name: id_loja
+        data_tests: &fk_loja
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_loja')
+                field: id_loja
+      - name: id_produto
+        data_tests: &fk_produto
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_produto')
+                field: id_produto
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: pct_presenca
+        description: 0 to 100. Warns (does not fail) when out of range.
+        data_tests: &pct_warn
+          - value_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn
+  - name: fct_ruptura
+    description: Share of valid answers in which the product was out of stock, per store, product and day.
+    data_tests: *grain_loja_produto_dia
+    columns:
+      - name: id_loja
+        data_tests: *fk_loja
+      - name: id_produto
+        data_tests: *fk_produto
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: pct_ruptura
+        description: 0 to 100. Warns (does not fail) when out of range.
+        data_tests: *pct_warn
+  - name: fct_mpdv
+    description: Share of valid answers in which point-of-sale material was activated, per store, product and day.
+    data_tests: *grain_loja_produto_dia
+    columns:
+      - name: id_loja
+        data_tests: *fk_loja
+      - name: id_produto
+        data_tests: *fk_produto
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: pct_material_ativado
+        description: 0 to 100. Warns (does not fail) when out of range.
+        data_tests: *pct_warn
+  - name: fct_ponto_extra
+    description: Extra displays (total and average) per store, product and day.
+    data_tests: *grain_loja_produto_dia
+    columns:
+      - name: id_loja
+        data_tests: *fk_loja
+      - name: id_produto
+        data_tests: *fk_produto
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: ponto_extra_medio
+        description: Warns (does not fail) when negative.
+        data_tests:
+          - non_negative:
+              config:
+                severity: warn
+  - name: fct_share_gondola
+    description: Average shelf share per store, product and day.
+    data_tests: *grain_loja_produto_dia
+    columns:
+      - name: id_loja
+        data_tests: *fk_loja
+      - name: id_produto
+        data_tests: *fk_produto
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: share_medio
+        description: 0 to 100. Warns (does not fail) when out of range.
+        data_tests: *pct_warn
+  - name: fct_preco
+    description: Price charged per store, product and day, without price outliers.
+    data_tests: *grain_loja_produto_dia
+    columns:
+      - name: id_loja
+        data_tests: *fk_loja
+      - name: id_produto
+        data_tests: *fk_produto
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: preco_observado
+        description: Warns (does not fail) when not positive.
+        data_tests:
+          - positive:
+              config:
+                severity: warn
+  - name: meta_preco
+    description: Price target, neither fact nor dimension - suggested price per product x channel, with tolerance band.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_produto, categoria_loja]
+    columns:
+      - name: id_produto
+        data_tests: *fk_produto
+      - name: categoria_loja
+        data_tests: [not_null]
+      - name: preco_sugerido
+        data_tests: [positive]
+  - name: meta_share_gondola
+    description: Shelf share target (%) per brand x channel, with the brand name flattened in.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_marca, categoria_loja]
+    columns:
+      - name: marca
+        data_tests: [not_null]
+      - name: categoria_loja
+        data_tests: [not_null]
+      - name: meta_share_pct
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0.01
+                max_value: 100
+  - name: prioridade_sku
+    description: SKU importance per channel - weekly turnover, must-have flag and weekly value (R$).
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_produto, categoria_loja]
+    columns:
+      - name: id_produto
+        data_tests: *fk_produto
+      - name: categoria_loja
+        data_tests: [not_null]
+      - name: valor_semanal
+        description: Weekly turnover x suggested price. Null when the SKU has no suggested price; warns (does not fail) when not positive.
+        data_tests:
+          - not_null
+          - positive:
+              config:
+                severity: warn

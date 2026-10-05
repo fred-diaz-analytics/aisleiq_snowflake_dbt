@@ -121,3 +121,156 @@ models:
         data_tests: [not_null]
       - name: source_date
         data_tests: [not_null]
+  - name: stg_preco_sugerido
+    description: Suggested price per product x store category, with a tolerance band (%).
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_produto, categoria_loja]
+    columns:
+      - name: id_produto
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_produtos')
+                field: id_produto
+      - name: categoria_loja
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['VAREJO', 'ATACADO', 'ATACAREJO']
+      - name: preco_sugerido
+        data_tests: [not_null, positive]
+      - name: banda_min_pct
+        description: Lower tolerance, always negative. Warns, as the original EXPECT only recorded it.
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: -100
+                max_value: -0.01
+              config:
+                severity: warn
+      - name: banda_max_pct
+        description: Upper tolerance, always positive. Warns, as the original EXPECT only recorded it.
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0.01
+                max_value: 1000
+              config:
+                severity: warn
+  - name: stg_sku_prioridade
+    description: Expected weekly turnover and must-have flag per product x store category.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_produto, categoria_loja]
+    columns:
+      - name: id_produto
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_produtos')
+                field: id_produto
+      - name: categoria_loja
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['VAREJO', 'ATACADO', 'ATACAREJO']
+      - name: giro_semanal_un
+        data_tests:
+          - positive:
+              config:
+                severity: warn
+  - name: stg_meta_share
+    description: Shelf share goal (%) per brand x store category.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_marca, categoria_loja]
+    columns:
+      - name: id_marca
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_marcas')
+                field: id_marca
+      - name: categoria_loja
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['VAREJO', 'ATACADO', 'ATACAREJO']
+      - name: meta_share_pct
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0.01
+                max_value: 100
+  - name: stg_execucao_pdv
+    description: >
+      One row per survey answer, typed per indicator, flagged with resposta_valida and
+      deduplicated (duplicate syncs, then one promoter per store and day). Answers that
+      fail the quality rules stay in the table, flagged; the marts keep only valid ones.
+      The DROP ROW expectations of the original (key, date and indicator present) are error
+      tests, like in stg_atendimentos; the plain EXPECTs (valid answer, price not an outlier)
+      are warn tests.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_loja, id_produto, indicador, id_usuario, dt_pesquisa]
+    columns:
+      - name: id_pesquisa_resposta
+        data_tests: [unique, not_null]
+      - name: id_usuario
+        data_tests: [not_null]
+      - name: id_loja
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_lojas')
+                field: id_loja
+      - name: id_produto
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_produtos')
+                field: id_produto
+      - name: dt_pesquisa
+        data_tests: [not_null]
+      - name: indicador
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['PRESENCA', 'RUPTURA', 'PRECO', 'MPDV', 'PONTO_EXTRA', 'SHARE_GONDOLA']
+      - name: resposta_valida
+        description: Passed the structural rules (no sentinel, in range, price above zero) and is not a price outlier.
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: [true]
+                quote: false
+              config:
+                severity: warn
+      - name: flag_outlier_preco
+        description: Price farther than 3.5 robust z-scores (median and MAD per SKU) from the SKU median.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [false]
+                quote: false
+              config:
+                severity: warn
+      - name: source_file
+        data_tests: [not_null]
+      - name: source_date
+        data_tests: [not_null]

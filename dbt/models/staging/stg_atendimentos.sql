@@ -17,8 +17,13 @@ with typed as (
         source_file,
         source_date,
         ingested_at,
-        try_to_date(data_checkin, 'DD/MM/YYYY') as data_checkin,
-        try_to_date(data_checkout, 'DD/MM/YYYY') as data_checkout
+        -- the pattern guard keeps try_to_date from accepting looser shapes than the original RLIKE did
+        case
+            when regexp_like(data_checkin, '[0-9]{2}/[0-9]{2}/[0-9]{4}') then try_to_date(data_checkin, 'DD/MM/YYYY')
+        end as data_checkin,
+        case
+            when regexp_like(data_checkout, '[0-9]{2}/[0-9]{2}/[0-9]{4}') then try_to_date(data_checkout, 'DD/MM/YYYY')
+        end as data_checkout
     from {{ source('raw', 'atendimentos') }}
 
 ),

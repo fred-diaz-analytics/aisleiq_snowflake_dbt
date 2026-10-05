@@ -55,6 +55,9 @@ python ingestion/ingest.py                 # PUT to @RAW.LANDING, COPY INTO RAW,
 
 Then `dbt seed && dbt build` (inside `dbt/`), and `dbt source freshness` to check that `RAW` is up to date.
 
+- `source_date` is not filled by `COPY INTO` itself, which only records `source_file` and `ingested_at`. A follow-up `UPDATE` (one statement for all files) fills it from the file name, only for rows still without a date, so a run that died after the load heals on the next one.
+- Freshness thresholds in `dbt/models/staging/_sources.yml` (warn after 2 days, error after 7) are a production-like default, not from the spec. The synthetic data ends on 2026-08-10, so `dbt source freshness` reports an error until `RAW` is reloaded with newer days; that is expected for a static data set, not a pipeline fault.
+
 ## Environment conventions
 
 - Dev (`AISLEIQ_DEV`) is the default target. Prod is only built by CI/orchestration.

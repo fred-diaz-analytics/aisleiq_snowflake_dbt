@@ -17,3 +17,9 @@ seeds:
     description: Product categories.
   - name: produtos
     description: Products. Carries the brand as an attribute (id_marca, marca).
+  - name: preco_sugerido
+    description: Suggested price per product x store category, with tolerance band. Copied unchanged from the original project.
+  - name: sku_prioridade
+    description: Expected weekly turnover and must-have flag per product x store category.
+  - name: meta_share
+    description: Shelf share goal (%) per brand x store category.

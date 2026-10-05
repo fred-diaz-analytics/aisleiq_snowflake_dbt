@@ -8,6 +8,7 @@ from datetime import date
 import pytest
 from ingest_lib import (
     DOMAINS,
+    build_source_date_update,
     parse_source_date,
     select_files_to_upload,
     source_date_from_name,
@@ -76,3 +77,21 @@ class TestSelectFilesToUpload:
 
     def test_empty_inputs(self):
         assert select_files_to_upload([], [], EXECUCAO) == []
+
+
+class TestBuildSourceDateUpdate:
+    def test_one_statement_covers_every_file(self):
+        files = ["execucao_pdv/20260101_execucao_pdv_bronze_synth.parquet", "execucao_pdv/20260102_execucao_pdv_bronze_synth.parquet"]
+        sql, params = build_source_date_update(EXECUCAO, files)
+        assert sql.count("UPDATE") == 1
+        assert sql.count("%s") == 4
+        assert params == [files[0], date(2026, 1, 1), files[1], date(2026, 1, 2)]
+
+    def test_only_rows_still_without_a_date_are_touched(self):
+        sql, _ = build_source_date_update(EXECUCAO, ["20260101_execucao_pdv_bronze_synth.parquet"])
+        assert "source_date IS NULL" in sql
+        assert sql.startswith(f"UPDATE {EXECUCAO.table}")
+
+    def test_a_foreign_file_name_is_rejected(self):
+        with pytest.raises(ValueError):
+            build_source_date_update(EXECUCAO, ["20260101_atendimento_synth.parquet"])

@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 import snowflake.connector
-from ingest_lib import DOMAINS, Domain, select_files_to_upload, source_date_from_name
+from ingest_lib import DOMAINS, Domain, build_source_date_update, select_files_to_upload
 
 STAGE = "LANDING"
 DEFAULT_DATA_DIR = Path(__file__).resolve().parent.parent / "generator" / "output"
@@ -90,11 +90,9 @@ def fill_source_dates(cur, name: str, domain: Domain) -> int:
     """
     cur.execute(f"SELECT DISTINCT source_file FROM {domain.table} WHERE source_date IS NULL")
     pending = [row[0] for row in cur.fetchall()]
-    for source_file in pending:
-        cur.execute(
-            f"UPDATE {domain.table} SET source_date = %s WHERE source_file = %s AND source_date IS NULL",
-            (source_date_from_name(source_file, domain), source_file),
-        )
+    if pending:
+        sql, params = build_source_date_update(domain, pending)
+        cur.execute(sql, params)
     return len(pending)
 
 

@@ -58,3 +58,23 @@ def select_files_to_upload(local_names: list[str], staged_names: list[str], doma
         if match and name not in staged:
             candidates.append((match.group(1), name))
     return [name for _, name in sorted(candidates)]
+
+
+def build_source_date_update(domain: Domain, source_files: list[str]) -> tuple[str, list]:
+    """One UPDATE that dates every given file at once, with its bind parameters.
+
+    One statement for all files instead of one per file: the full backfill has
+    158 files and per-file updates took minutes. Only rows still without a date
+    are touched, so a rerun is harmless. Raises ValueError for a name that does
+    not belong to the domain.
+    """
+    params: list = []
+    for source_file in source_files:
+        params += [source_file, source_date_from_name(source_file, domain)]
+    rows = ", ".join(["(%s, %s)"] * len(source_files))
+    sql = (
+        f"UPDATE {domain.table} AS t SET source_date = d.source_date "
+        f"FROM (SELECT column1 AS source_file, column2::DATE AS source_date FROM VALUES {rows}) AS d "
+        "WHERE t.source_file = d.source_file AND t.source_date IS NULL"
+    )
+    return sql, params
