@@ -1,6 +1,6 @@
 # AisleIQ on Snowflake + dbt
 
-[Leia em português](README.pt-BR.md)
+[Portuguese version](README.pt-BR.md)
 
 Point-of-sale execution analytics (trade marketing) over 100% synthetic data: how products are displayed, priced and signposted in stores, and how field promoters carry out their visits. This is the Snowflake + dbt rebuild of AisleIQ, with the same domain and the same synthetic generator as the original Databricks version. No real data or PII.
 
