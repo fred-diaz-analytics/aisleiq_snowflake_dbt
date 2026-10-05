@@ -93,3 +93,31 @@ models:
               arguments:
                 to: ref('stg_categorias')
                 field: id_categoria
+  - name: stg_atendimentos
+    description: >
+      One row per visit attempt, typed, with the geolocation check and deduplicated.
+      Replaces the DROP ROW expectations of the original with tests that fail the build.
+    columns:
+      - name: id_pesquisa_resposta
+        data_tests: [unique, not_null]
+      - name: id_usuario
+        data_tests: [not_null]
+      - name: id_loja
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_lojas')
+                field: id_loja
+      - name: atendimento
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['OK', 'NP', 'X']
+      - name: tempo_loja
+        data_tests: [non_negative]
+      - name: source_file
+        data_tests: [not_null]
+      - name: source_date
+        data_tests: [not_null]

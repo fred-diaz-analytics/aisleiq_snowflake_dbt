@@ -40,6 +40,21 @@ DBT_PROFILES_DIR=. ../.venv/Scripts/dbt.exe debug
 
 `dbt/profiles.yml` is copied from `profiles.yml.example` (only `env_var`, no real values) and is in `.gitignore`.
 
+## 4. Generate and load the daily data
+
+```bash
+python generator/backfill_2026.py          # deterministic parquets in generator/output (git-ignored)
+set -a; source ~/.aisleiq/aisleiq.env; set +a
+python ingestion/ingest.py                 # PUT to @RAW.LANDING, COPY INTO RAW, as AISLEIQ_LOADER
+```
+
+- The generator is the original one, ported; the same seeds reproduce the same data (checked frame by frame against the original files; the `pytest` suite covers its rules).
+- `ingest.py` is idempotent: `PUT` never overwrites a staged file and `COPY INTO` keeps a load history per file, so a second run loads nothing and generating new days uploads only those days. It loads by column name and fills `source_file` (Snowflake metadata) and `source_date` (parsed from the file name by the tested `ingest_lib.py`).
+- `COPY INTO` remembers a file for 64 days. A file staged longer ago than that is treated as "load status uncertain" and skipped, never loaded twice.
+- The load role is `SNOWFLAKE_LOADER_ROLE` (default `AISLEIQ_LOADER`); dbt keeps using `AISLEIQ_TRANSFORMER`.
+
+Then `dbt seed && dbt build` (inside `dbt/`), and `dbt source freshness` to check that `RAW` is up to date.
+
 ## Environment conventions
 
 - Dev (`AISLEIQ_DEV`) is the default target. Prod is only built by CI/orchestration.

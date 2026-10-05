@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Daily synthetic files loaded unchanged from the internal stage by
+      ingestion/ingest.py, plus file metadata (source_file, source_date, ingested_at).
+    schema: raw
+    config:
+      loaded_at_field: ingested_at
+      freshness:
+        warn_after: {count: 2, period: day}
+        error_after: {count: 7, period: day}
+    tables:
+      - name: atendimentos
+        description: One row per visit attempt (atendimento), as loaded from the daily files.
+      - name: execucao_pdv
+        description: One row per survey answer (store x product x question), as loaded from the daily files.

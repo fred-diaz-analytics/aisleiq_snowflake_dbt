@@ -32,8 +32,10 @@ Schema names are clean (no `<target>_` prefix) in both databases; see `dbt/macro
 - Closed value sets get `accepted_values`.
 - Dimensions test that the attributes resolved by joins are `not_null`, which doubles as a check that no lookup was missed.
 - Generic tests use the `arguments:` form (dbt 1.12).
-- A rule that used to be a Databricks `EXPECT` becomes a test; its `severity` says whether it warns or fails. The original `dim_loja` and `dim_produto` had `EXPECT (id_... IS NOT NULL) ON VIOLATION DROP ROW`. Here that is a `not_null` test at the default `error` severity: a null key fails the build instead of silently dropping the row ("record, do not hide"). Use an explicit `where` filter only when dropping rows is the intended behavior.
-- Keys and relationships are tested once, on the staging models. Seeds carry descriptions only.
+- A rule that used to be a Databricks `EXPECT` becomes a test; its `severity` says whether it warns or fails. The original `dim_loja` and `dim_produto` had `EXPECT (id_... IS NOT NULL) ON VIOLATION DROP ROW`. Here that is a `not_null` test at the default `error` severity: a null key fails the build instead of silently dropping the row ("record, do not hide"). Use an explicit `where` filter only when dropping rows is the intended behavior. A `EXPECT` without `DROP ROW` (it only recorded the violation) becomes a test with `severity: warn`.
+- Keys and relationships are tested once, on the staging models. Seeds carry descriptions only. Daily facts in `MARTS` are the exception: their `id_loja` is also tested against `dim_loja`, because the mart-level foreign key is what consumers rely on.
+- A grain made of several columns uses the local generic test `unique_combination`; value rules use `non_negative` and `value_between` (all in `dbt/tests/generic/`, no external packages).
+- Staging models that read `RAW` go through `source('raw', ...)`, declared in `_sources.yml` with a freshness check on `ingested_at`.
 
 ## Master data
 

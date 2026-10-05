@@ -27,3 +27,54 @@ models:
         data_tests: [not_null]
       - name: tamanho
         data_tests: [not_null]
+  - name: fct_cumprimento_visita
+    description: Visit compliance (OK / NP / X) per promoter, store and day.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_usuario, id_loja, dt_visita]
+    columns:
+      - name: id_usuario
+        data_tests: [not_null]
+      - name: id_loja
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_loja')
+                field: id_loja
+      - name: dt_visita
+        data_tests: [not_null]
+      - name: pct_ok
+        description: Share of OK visits, 0 to 100. Warns (does not fail) when out of range, so the problem is recorded, not hidden.
+        data_tests:
+          - value_between:
+              arguments:
+                min_value: 0
+                max_value: 100
+              config:
+                severity: warn
+  - name: fct_tempo_loja
+    description: Time in store (average and total, minutes) of OK visits, per promoter, store and day.
+    data_tests:
+      - unique_combination:
+          arguments:
+            column_names: [id_usuario, id_loja, dt_visita]
+    columns:
+      - name: id_usuario
+        data_tests: [not_null]
+      - name: id_loja
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_loja')
+                field: id_loja
+      - name: dt_visita
+        data_tests: [not_null]
+      - name: tempo_loja_medio
+        description: Average minutes in store. Warns (does not fail) when negative.
+        data_tests:
+          - non_negative:
+              config:
+                severity: warn

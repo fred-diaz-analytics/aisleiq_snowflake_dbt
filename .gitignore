@@ -39,3 +39,6 @@ skills-lock.json
 CLAUDE.md
 docs/agents/
 docs/research/
+
+# Generated synthetic data (reproducible via generator/backfill_2026.py)
+generator/output/

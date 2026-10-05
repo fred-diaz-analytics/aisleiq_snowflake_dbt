@@ -32,10 +32,7 @@ section "dbt parse (no credentials)"
 )
 
 section "pytest"
-rc=0
-pytest -q --no-header || rc=$?
-# Exit code 5 means "no tests collected", which is fine until tests exist.
-[[ $rc -eq 0 || $rc -eq 5 ]]
+pytest -q --no-header
 
 section "leak scan"
 bash scripts/check_leaks.sh
@@ -63,9 +60,10 @@ scan() {
 ctrl=$(printf '[\001-\010\013\014\016-\037]')
 git ls-files | scan "control character" "$ctrl"
 # Everything is English; only the glossary keeps Portuguese domain terms, and
-# the seeds, which are master data copied unchanged (accented city names, ...).
+# the seeds and the generator's city list, which are master data copied
+# unchanged (accented city names, ...).
 # Accented Latin letters are 0xC3 0x80-0xBF in UTF-8.
 accent=$(printf '\303[\200-\277]')
-git ls-files | grep -vE '^(GLOSSARY.md|dbt/seeds/.*\.csv)$' | scan "accented (non-English) text" "$accent"
+git ls-files | grep -vE '^(GLOSSARY.md|dbt/seeds/.*\.csv|generator/cidades_reais\.csv)$' | scan "accented (non-English) text" "$accent"
 
 printf '\nAll checks passed.\n'
