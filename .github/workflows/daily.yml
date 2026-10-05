@@ -1,0 +1,58 @@
+name: Daily refresh
+
+# Builds AISLEIQ_PROD. Only runs on the default branch (schedule) or when the
+# owner starts it by hand. Never triggered by pull requests or forks, so the
+# secrets are not reachable from outside contributions. See docs/orchestration.md.
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: production
+    env:
+      SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+      SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
+      SNOWFLAKE_ROLE: AISLEIQ_TRANSFORMER
+      SNOWFLAKE_WAREHOUSE: AISLEIQ_WH
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: pip install -r requirements.txt
+      - name: Write the private key to a temporary file
+        env:
+          SNOWFLAKE_PRIVATE_KEY: ${{ secrets.SNOWFLAKE_PRIVATE_KEY }}
+        run: |
+          umask 077
+          key="$RUNNER_TEMP/snowflake_key.p8"
+          printf '%s\n' "$SNOWFLAKE_PRIVATE_KEY" > "$key"
+          echo "SNOWFLAKE_PRIVATE_KEY_PATH=$key" >> "$GITHUB_ENV"
+      - name: Generate, ingest and build (prod)
+        run: bash scripts/run_all.sh --target prod --docs
+      - name: Remove the private key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/snowflake_key.p8"
+      - name: Upload dbt docs (lineage)
+        uses: actions/upload-artifact@v4
+        with:
+          name: dbt-docs
+          path: |
+            dbt/target/index.html
+            dbt/target/manifest.json
+            dbt/target/catalog.json
+          retention-days: 30

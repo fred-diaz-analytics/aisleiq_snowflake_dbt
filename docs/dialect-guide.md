@@ -1,6 +1,6 @@
 # Databricks to Snowflake dialect guide
 
-Differences found while migrating the original AisleIQ SQL. Each row is something that either changed the SQL or could have changed the result silently. The guide grows with every ticket; the closing ticket polishes it.
+Differences found while migrating the original AisleIQ SQL. Each row is something that either changed the SQL or could have changed the result silently. Layer names map as bronze to `RAW`, silver to `STAGING`, gold to `MARTS` (see `docs/architecture.md`).
 
 | Topic | Databricks (original) | Snowflake / dbt (here) | Why it matters |
 |---|---|---|---|

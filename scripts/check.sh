@@ -59,11 +59,11 @@ scan() {
 # Control characters (a stray BEL once came from a sed escape).
 ctrl=$(printf '[\001-\010\013\014\016-\037]')
 git ls-files | scan "control character" "$ctrl"
-# Everything is English; only the glossary keeps Portuguese domain terms, and
+# Everything is English; only the glossary and the Portuguese README keep Portuguese domain terms, and
 # the seeds and the generator's city list, which are master data copied
 # unchanged (accented city names, ...).
 # Accented Latin letters are 0xC3 0x80-0xBF in UTF-8.
 accent=$(printf '\303[\200-\277]')
-git ls-files | grep -vE '^(GLOSSARY.md|dbt/seeds/.*\.csv|generator/cidades_reais\.csv)$' | scan "accented (non-English) text" "$accent"
+git ls-files | grep -vE '^(GLOSSARY.md|README.pt-BR.md|dbt/seeds/.*\.csv|generator/cidades_reais\.csv)$' | scan "accented (non-English) text" "$accent"
 
 printf '\nAll checks passed.\n'

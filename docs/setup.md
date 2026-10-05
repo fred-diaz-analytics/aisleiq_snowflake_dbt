@@ -53,10 +53,18 @@ python ingestion/ingest.py                 # PUT to @RAW.LANDING, COPY INTO RAW,
 - `COPY INTO` remembers a file for 64 days. A file staged longer ago than that is treated as "load status uncertain" and skipped, never loaded twice.
 - The load role is `SNOWFLAKE_LOADER_ROLE` (default `AISLEIQ_LOADER`); dbt keeps using `AISLEIQ_TRANSFORMER`.
 
-Then `dbt seed && dbt build` (inside `dbt/`), and `dbt source freshness` to check that `RAW` is up to date.
+Or run all of it, plus dbt, with `bash scripts/run_all.sh` (see `docs/orchestration.md`). Then `dbt seed && dbt build` (inside `dbt/`), and `dbt source freshness` to check that `RAW` is up to date.
 
 - `source_date` is not filled by `COPY INTO` itself, which only records `source_file` and `ingested_at`. A follow-up `UPDATE` (one statement for all files) fills it from the file name, only for rows still without a date, so a run that died after the load heals on the next one.
 - Freshness thresholds in `dbt/models/staging/_sources.yml` (warn after 2 days, error after 7) are a production-like default, not from the spec. The synthetic data ends on 2026-08-10, so `dbt source freshness` reports an error until `RAW` is reloaded with newer days; that is expected for a static data set, not a pipeline fault.
+
+## Rebuild everything after the trial expires
+
+The repository is the source of truth; nothing lives only in Snowflake.
+
+1. Create a new Snowflake account and repeat step 2 (the wizard is idempotent and generates a new key pair).
+2. `bash scripts/run_all.sh` regenerates the same synthetic data (deterministic), loads `RAW`, and runs `dbt seed` and `dbt build` in dev. Add `--target prod` to build prod.
+3. Update the three GitHub secrets (`SNOWFLAKE_ACCOUNT`, `SNOWFLAKE_USER`, `SNOWFLAKE_PRIVATE_KEY`) so the daily schedule works again (`docs/orchestration.md`).
 
 ## Environment conventions
 
@@ -70,4 +78,4 @@ bash scripts/check.sh           # ruff, yamllint, sqlfluff, shellcheck, dbt pars
 bash scripts/install_hooks.sh   # once per clone: pre-commit leak scan + commit-msg format
 ```
 
-CI runs exactly `scripts/check.sh`, plus a gitleaks scan, so a green local run means a green CI run. Commit messages must follow conventional commits (`feat: ...`) in plain ASCII English; accented text is only allowed in `GLOSSARY.md`.
+CI runs exactly `scripts/check.sh`, plus a gitleaks scan, so a green local run means a green CI run. Commit messages must follow conventional commits (`feat: ...`) in plain ASCII English; accented text is only allowed in `GLOSSARY.md` and `README.pt-BR.md`.
