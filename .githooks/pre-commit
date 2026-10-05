@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Blocks commits that add personal paths, key material or real Snowflake hosts.
+exec bash "$(git rev-parse --show-toplevel)/scripts/check_leaks.sh" --staged

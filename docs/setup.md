@@ -44,3 +44,12 @@ DBT_PROFILES_DIR=. ../.venv/Scripts/dbt.exe debug
 
 - Dev (`AISLEIQ_DEV`) is the default target. Prod is only built by CI/orchestration.
 - Schemas have clean names (`STAGING`, `MARTS`) in both environments: `dbt/macros/generate_schema_name.sql`.
+
+## Checks and hooks
+
+```bash
+bash scripts/check.sh           # ruff, yamllint, sqlfluff, shellcheck, dbt parse, pytest, leak scan, text hygiene
+bash scripts/install_hooks.sh   # once per clone: pre-commit leak scan + commit-msg format
+```
+
+CI runs exactly `scripts/check.sh`, plus a gitleaks scan, so a green local run means a green CI run. Commit messages must follow conventional commits (`feat: ...`) in plain ASCII English; accented text is only allowed in `GLOSSARY.md`.

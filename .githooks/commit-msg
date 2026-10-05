@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Commit messages: conventional commits, plain ASCII English.
+msg_file="$1"
+subject=$(head -n1 "$msg_file")
+re='^(feat|fix|docs|chore|ci|refactor|test|build|perf|style)(\([a-z0-9_-]+\))?!?: .+'
+
+if ! [[ "$subject" =~ $re ]]; then
+  echo "commit-msg: subject must look like 'feat: add thing' (feat|fix|docs|chore|ci|refactor|test|build|perf|style)." >&2
+  exit 1
+fi
+
+# Any byte above 0x7F means accented (non-English) text. grep exit 1 is "no
+# match"; a higher exit is a grep error and must block the commit too.
+rc=0
+LC_ALL=C grep -q "$(printf '[\200-\377]')" "$msg_file" || rc=$?
+if (( rc == 0 )); then
+  echo "commit-msg: write the message in plain ASCII English." >&2
+  exit 1
+elif (( rc != 1 )); then
+  echo "commit-msg: grep failed (exit $rc)." >&2
+  exit 1
+fi

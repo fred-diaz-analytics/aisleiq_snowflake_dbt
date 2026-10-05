@@ -3,3 +3,4 @@ ruff>=0.6
 yamllint>=1.35
 sqlfluff>=3.2
 pytest>=8.0
+shellcheck-py>=0.10

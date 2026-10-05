@@ -1,0 +1,3 @@
+# The wizard library (copied verbatim from the template, never hand-edited)
+# defines color variables that individual wizards may not use.
+disable=SC2034

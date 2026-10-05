@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  lint-and-parse:
+  checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -16,18 +16,15 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-dev.txt
       - run: pip install -r requirements-dev.txt
-      - name: ruff
-        run: ruff check .
-      - name: yamllint
-        run: yamllint .
-      - name: sqlfluff
-        run: sqlfluff lint dbt/models dbt/macros --dialect snowflake
-      - name: dbt parse (no credentials)
-        working-directory: dbt
+      - name: All checks (same script as local)
+        run: bash scripts/check.sh
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
         env:
-          DBT_PROFILES_DIR: ${{ github.workspace }}/dbt
-        run: |
-          cp profiles.yml.example profiles.yml
-          dbt parse
-      - name: pytest
-        run: pytest -q --no-header || [ $? -eq 5 ]
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

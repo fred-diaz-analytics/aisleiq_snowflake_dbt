@@ -261,7 +261,10 @@ write_env SNOWFLAKE_DATABASE "AISLEIQ_DEV"
 [[ -f "$REPO_ROOT/dbt/profiles.yml" ]] || cp "$REPO_ROOT/dbt/profiles.yml.example" "$REPO_ROOT/dbt/profiles.yml"
 DBT_BIN="$REPO_ROOT/.venv/Scripts/dbt.exe"; [[ -x "$DBT_BIN" ]] || DBT_BIN="$REPO_ROOT/.venv/bin/dbt"
 if [[ -x "$DBT_BIN" ]] && confirm "Run 'dbt debug' now? (wakes the warehouse for ~1 min)"; then
-  set -a; source "$ENV_FILE"; set +a
+  set -a
+  # shellcheck source=/dev/null
+  source "$ENV_FILE"
+  set +a
   ( cd "$REPO_ROOT/dbt" && DBT_PROFILES_DIR="$REPO_ROOT/dbt" "$DBT_BIN" debug ) \
     || SKIPPED+=("dbt debug failed: check the env file and the public key on the AISLEIQ_SVC user")
 else
