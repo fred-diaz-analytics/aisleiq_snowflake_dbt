@@ -1,0 +1,4 @@
+# Shell scripts and hooks must keep LF line endings, even when cloned on
+# Windows with core.autocrlf, or bash fails on the carriage returns.
+*.sh text eol=lf
+.githooks/* text eol=lf
