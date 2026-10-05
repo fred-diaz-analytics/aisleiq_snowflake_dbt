@@ -50,18 +50,20 @@ The survey answers are split in two models:
 - `stg_execucao_pdv_dedup` is `incremental` with the `microbatch` strategy: daily batches, event time `source_date` (the file date, never null), start date 2026-01-01. Both dedupe steps partition by day, so one batch holds everything they need. `dt_pesquisa` equals `source_date` in every file, and the singular test `execucao_pdv_data_igual_ao_arquivo` fails if that stops being true, because the batch would then cut a day in two. A late file for an old day is picked up by rerunning that day's batch.
 - `stg_execucao_pdv` is a `table` on top of it: the per-SKU price median and MAD span all days, so a new day can flip the outlier flag of an old row, which a one-day batch cannot do. Its median and MAD scan only the PRICE rows (about a sixth of the data); the rest passes through.
 
+`lookback: 2` makes every normal run rebuild three daily batches: the latest one plus the two before it, so a file that arrives up to two days late is still picked up. The measurements below used the previous window of two days (`lookback` 1, the default); each batch costs a fixed 4 to 6 s, so the third adds about that much.
+
 The marts keep reading `stg_execucao_pdv`; nothing else changed.
 
 ### When incremental pays off here
 
-It does not, at this volume. Measured on the X-Small warehouse with 1.27M rows: the old single `table` built in about 6 s; the default incremental run (the last two days) takes about 19 s, plus about 4 s for the outlier table. A batch costs a fixed 4 to 6 s of scheduling and a delete+insert, which is more than rebuilding the whole table. A full refresh is slower again: 278 daily batches took about 340 s. It starts to pay off when a full rebuild takes minutes (tens of millions of rows) or costs real credits; until then it is kept as the pattern for the larger volume.
+It does not, at this volume. Measured on the X-Small warehouse with 1.27M rows: the old single `table` built in about 6 s; the incremental run with the earlier two-day window takes about 19 s, plus about 4 s for the outlier table. A batch costs a fixed 4 to 6 s of scheduling and a delete+insert, which is more than rebuilding the whole table. A full refresh is slower again: 278 daily batches took about 340 s. It starts to pay off when a full rebuild takes minutes (tens of millions of rows) or costs real credits; until then it is kept as the pattern for the larger volume.
 
 ### Running it
 
 Always run the two models together (or `-s stg_execucao_pdv_dedup+`): `stg_execucao_pdv` is a table, so running only the incremental model leaves its outlier flag, and the marts, stale. Keys and relationships are tested once, on `stg_execucao_pdv`, which is what the marts read; the incremental model only guards its own grain and dates. `begin` is 2026-01-01: a file with an earlier `source_date` is never loaded by a full refresh, so move `begin` back if older days ever arrive.
 
 ```bash
-dbt run -s stg_execucao_pdv_dedup stg_execucao_pdv                      # daily: the last two days
+dbt run -s stg_execucao_pdv_dedup stg_execucao_pdv                      # daily: the last three days (today plus lookback 2)
 dbt run -s stg_execucao_pdv_dedup stg_execucao_pdv --full-refresh       # rebuild everything (about 6 min)
 dbt run -s stg_execucao_pdv_dedup stg_execucao_pdv   --event-time-start 2026-03-10 --event-time-end 2026-03-13             # reprocess a window
 ```

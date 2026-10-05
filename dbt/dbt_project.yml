@@ -27,6 +27,7 @@ models:
         +event_time: source_date
         +begin: "2026-01-01"
         +batch_size: day
+        +lookback: 2
     marts:
       +schema: marts
       +materialized: table
