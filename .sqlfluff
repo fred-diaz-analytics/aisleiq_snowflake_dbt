@@ -1,0 +1,14 @@
+[sqlfluff]
+dialect = snowflake
+templater = jinja
+max_line_length = 120
+exclude_rules = LT05
+
+# Stubs so the lint runs without a connection or a dbt manifest.
+[sqlfluff:templater:jinja:macros]
+dbt_ref = {% macro ref(name) %}{{ name }}{% endmacro %}
+dbt_source = {% macro source(src, name) %}{{ src }}_{{ name }}{% endmacro %}
+dbt_config = {% macro config() %}{% endmacro %}
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = lower

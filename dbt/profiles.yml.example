@@ -1,0 +1,23 @@
+aisleiq:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', 'ci-dummy') }}"
+      user: "{{ env_var('SNOWFLAKE_USER', 'ci_dummy') }}"
+      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH', 'ci-dummy.p8') }}"
+      role: AISLEIQ_TRANSFORMER
+      warehouse: AISLEIQ_WH
+      database: AISLEIQ_DEV
+      schema: STAGING
+      threads: 4
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', 'ci-dummy') }}"
+      user: "{{ env_var('SNOWFLAKE_USER', 'ci_dummy') }}"
+      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH', 'ci-dummy.p8') }}"
+      role: AISLEIQ_TRANSFORMER
+      warehouse: AISLEIQ_WH
+      database: AISLEIQ_PROD
+      schema: STAGING
+      threads: 4

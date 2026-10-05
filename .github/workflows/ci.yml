@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-parse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: pip install -r requirements-dev.txt
+      - name: ruff
+        run: ruff check .
+      - name: yamllint
+        run: yamllint .
+      - name: sqlfluff
+        run: sqlfluff lint dbt/models dbt/macros --dialect snowflake
+      - name: dbt parse (no credentials)
+        working-directory: dbt
+        env:
+          DBT_PROFILES_DIR: ${{ github.workspace }}/dbt
+        run: |
+          cp profiles.yml.example profiles.yml
+          dbt parse
+      - name: pytest
+        run: pytest -q --no-header || [ $? -eq 5 ]

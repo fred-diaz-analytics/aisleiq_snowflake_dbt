@@ -1,0 +1,41 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.p8
+*.pem
+*.key
+profiles.yml
+!profiles.yml.example
+.claude/settings.local.json
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# dbt: anonymous per-machine id
+.user.yml
+
+# Dev-only: agent config, local ticket tracker, working notes
+.scratch/
+.agents/
+.claude/
+skills-lock.json
+CLAUDE.md
+docs/agents/
+docs/research/

@@ -1,0 +1,5 @@
+dbt-core==1.12.5
+dbt-snowflake==1.12.1
+snowflake-connector-python[pandas]>=3.12
+pyarrow>=15
+pandas>=2.0
