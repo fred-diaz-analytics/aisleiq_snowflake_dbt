@@ -23,8 +23,8 @@ Objects created:
 
 | Object | Name |
 |---|---|
-| Databases | `AISLEIQ_DEV`, `AISLEIQ_PROD` (each with `RAW`, `STAGING`, `MARTS`) |
-| Roles | `AISLEIQ_LOADER` (writes to `RAW`), `AISLEIQ_TRANSFORMER` (reads `RAW`, writes to `STAGING` and `MARTS`) |
+| Databases | `AISLEIQ_DEV`, `AISLEIQ_PROD` (each with `RAW`, `SEEDS`, `STAGING`, `MARTS`) |
+| Roles | `AISLEIQ_LOADER` (writes to `RAW`), `AISLEIQ_TRANSFORMER` (reads `RAW`, writes to `SEEDS`, `STAGING` and `MARTS`) |
 | Warehouse | `AISLEIQ_WH` (X-Small, Gen1, 60s auto-suspend, no query acceleration) |
 | Resource monitor | `AISLEIQ_RM` (monthly cap; notifies at 75%, suspends at 100%) |
 | Internal stage | `RAW.LANDING` in each database |
@@ -43,7 +43,7 @@ DBT_PROFILES_DIR=. ../.venv/Scripts/dbt.exe debug
 ## Environment conventions
 
 - Dev (`AISLEIQ_DEV`) is the default target. Prod is only built by CI/orchestration.
-- Schemas have clean names (`STAGING`, `MARTS`) in both environments: `dbt/macros/generate_schema_name.sql`.
+- Schemas have clean names (`SEEDS`, `STAGING`, `MARTS`) in both environments: `dbt/macros/generate_schema_name.sql`.
 
 ## Checks and hooks
 

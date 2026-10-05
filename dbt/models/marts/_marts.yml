@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: dim_loja
+    description: Store dimension, one row per store, with chain, category, city, UF and region resolved.
+    columns:
+      - name: id_loja
+        data_tests: [unique, not_null]
+      - name: rede
+        data_tests: [not_null]
+      - name: categoria_loja
+        data_tests: [not_null]
+      - name: cidade
+        data_tests: [not_null]
+      - name: uf
+        data_tests: [not_null]
+      - name: regiao
+        data_tests: [not_null]
+  - name: dim_produto
+    description: Product dimension, one row per product, with brand and category resolved.
+    columns:
+      - name: id_produto
+        data_tests: [unique, not_null]
+      - name: marca
+        data_tests: [not_null]
+      - name: categoria_produto
+        data_tests: [not_null]
+      - name: tamanho
+        data_tests: [not_null]

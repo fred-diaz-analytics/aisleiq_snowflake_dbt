@@ -1,0 +1,95 @@
+version: 2
+
+models:
+  - name: stg_estados
+    description: One row per state (UF).
+    columns:
+      - name: uf
+        data_tests: [unique, not_null]
+      - name: regiao
+        data_tests: [not_null]
+  - name: stg_cidades
+    description: One row per city.
+    columns:
+      - name: id_cidade
+        data_tests: [unique, not_null]
+      - name: uf
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_estados')
+                field: uf
+  - name: stg_categorias_loja
+    description: One row per store category.
+    columns:
+      - name: id_categoria_loja
+        data_tests: [unique, not_null]
+      - name: categoria_loja
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['VAREJO', 'ATACADO', 'ATACAREJO']
+  - name: stg_redes
+    description: One row per store chain.
+    columns:
+      - name: id_rede
+        data_tests: [unique, not_null]
+  - name: stg_lojas
+    description: One row per store, with foreign keys still unresolved.
+    columns:
+      - name: id_loja
+        data_tests: [unique, not_null]
+      - name: id_cidade
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_cidades')
+                field: id_cidade
+      - name: id_categoria_loja
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_categorias_loja')
+                field: id_categoria_loja
+      - name: id_rede
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_redes')
+                field: id_rede
+  - name: stg_categorias
+    description: One row per product category.
+    columns:
+      - name: id_categoria
+        data_tests: [unique, not_null]
+  - name: stg_marcas
+    description: One row per brand, derived from the product master data (no file of its own).
+    columns:
+      - name: id_marca
+        data_tests: [unique, not_null]
+      - name: marca
+        data_tests: [not_null]
+  - name: stg_produtos
+    description: One row per product, with foreign keys still unresolved.
+    columns:
+      - name: id_produto
+        data_tests: [unique, not_null]
+      - name: id_marca
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_marcas')
+                field: id_marca
+      - name: id_categoria
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_categorias')
+                field: id_categoria

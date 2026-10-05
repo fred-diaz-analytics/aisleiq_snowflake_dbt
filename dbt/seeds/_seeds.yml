@@ -1,0 +1,19 @@
+version: 2
+
+# Keys and relationships are tested on the staging models (see _staging.yml),
+# so each check runs once.
+seeds:
+  - name: estados
+    description: States (UF) with region. Master data, copied unchanged from the original project.
+  - name: cidades
+    description: Cities with their UF.
+  - name: categorias_loja
+    description: Store categories (VAREJO, ATACADO, ATACAREJO).
+  - name: redes
+    description: Store chains.
+  - name: lojas
+    description: Stores (PDV) with foreign keys to city, category and chain.
+  - name: categorias
+    description: Product categories.
+  - name: produtos
+    description: Products. Carries the brand as an attribute (id_marca, marca).

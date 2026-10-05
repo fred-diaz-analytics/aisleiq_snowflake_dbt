@@ -10,6 +10,10 @@ macro-paths: ["macros"]
 
 clean-targets: ["target", "dbt_packages"]
 
+seeds:
+  aisleiq:
+    +schema: seeds
+
 models:
   aisleiq:
     staging:

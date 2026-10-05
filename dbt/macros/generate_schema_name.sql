@@ -1,5 +1,5 @@
 {#
-  Uses the custom schema exactly as declared (STAGING, MARTS), without the
+  Uses the custom schema exactly as declared (SEEDS, STAGING, MARTS), without the
   <target_schema>_ prefix dbt applies by default. Dev and prod are separated
   by database, not by schema name.
 #}
