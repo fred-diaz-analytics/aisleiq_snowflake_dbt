@@ -27,8 +27,8 @@ jobs:
       SNOWFLAKE_ROLE: AISLEIQ_TRANSFORMER
       SNOWFLAKE_WAREHOUSE: AISLEIQ_WH
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
           cache: pip
@@ -48,7 +48,7 @@ jobs:
         if: always()
         run: rm -f "$RUNNER_TEMP/snowflake_key.p8"
       - name: Upload dbt docs (lineage)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: dbt-docs
           path: |
